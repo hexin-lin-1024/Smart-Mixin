@@ -31,7 +31,7 @@ Clash 类包含数个成员函数以实现修改配置文件的功能。
 |dump|输出YAML为字符串|不接受参数|
   
 
-使用例：  
+## 使用例：  
 ```Python
 url = '' #订阅URL
 
@@ -52,3 +52,24 @@ def clash(url):
 
 print(clash(url)) #打印处理好的YAML字符串
 ```
+  
+
+## 与FastAPI结合  
+
+```Python
+from fastapi.responses import PlainTextResponse
+from fastapi import FastAPI
+from PreProcesser import *
+url = '' #订阅URL
+app = FastAPI()
+def clash(url):
+    c = Clash(url)
+    pass
+    #在这里补充需要的代码
+    return c.dump()
+@app.get("/", response_class=PlainTextResponse)
+async def process():
+    return clash(url)
+```
+  
+效果：访问FastAPI根目录时输出处理好的YAML（以纯文本网页形式）。
