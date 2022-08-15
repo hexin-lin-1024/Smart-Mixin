@@ -24,7 +24,7 @@ Clash 类包含数个成员函数以实现修改配置文件的功能。
 |del_proxy_group|删除代理组（并替换为某个策略）|name（代理组的名称）, policy=None（不携带此参数代表直接删除所有相关规则，若参数不为None时改写原来所有相关规则的策略）
 |append_proxy_group|追加新的代理组|dict（从YAML编码的字典）
 |insert_proxy_group|从前端插入新的代理组|dict（从YAML编码的字典）
-|proxy_filter|代理筛选器（筛选符合正则表达式的代理名称列表）|pattern（正则表达式）, mode（字符串，可以是select或者reverse_select，代表选择符合正则表达式的代理或者反选）, proxies=None（不携带此参数代表从所有代理中筛选，否则为一个包含代理名称字符串的列表，程序将从中筛选）
+|proxy_selector|代理选择器（筛选符合正则表达式的代理名称列表）|pattern（正则表达式，不携带此参数代表选择全部给出的代理）, reverse_select（是否反选，不携带此参数代表正向选择）, proxies=None（不携带此参数代表从所有代理中筛选，否则为一个包含代理名称字符串的列表，程序将从中筛选）
 |insert_rules|从前端插入规则|type=None, content=None, policy=None, list=None（list代表多条规则）；必须同时给出type, content, policy三个参数或者给出list参数
 |del_rules|删除规则|type=None, content=None, policy=None（删除所有匹配的规则）；三个参数中至少给出一个
 |modify_proxy_group|修改代理组|name=None（原来的代理组名称）, proxies=None（修改为列表包含的代理）, new_name=None（新的名称）；name参数必须给出，proxies和new_name参数中至少给出一个
