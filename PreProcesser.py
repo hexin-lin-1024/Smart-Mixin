@@ -39,23 +39,21 @@ class Clash():
     def insert_proxy_group(self, dict):
         self.file['proxy-groups']=[dict]+self.file['proxy-groups']
 
-    def proxy_filter(self, pattern, mode, proxies=None):
+    def proxy_selector(self, pattern=None, reverse_select=False, proxies=None):
         # mode can be select or reverse_select
         if proxies == None:
             all_proxies = [i['name'] for i in self.file['proxies']]
         else:
             all_proxies=proxies
         result = []
-        if mode == 'select':
-            for i in all_proxies:
-                if re.search(pattern, i):
-                    result.append(i)
-        elif mode == 'reverse_select':
+        if reverse_select:
             for i in all_proxies:
                 if not re.search(pattern, i):
                     result.append(i)
         else:
-            raise ValueError("mode error")
+            for i in all_proxies:
+                if re.search(pattern, i):
+                    result.append(i)
         return deepcopy(result)
 
     def insert_rules(self, type=None, content=None, policy=None, list=None):
