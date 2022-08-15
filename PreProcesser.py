@@ -40,11 +40,12 @@ class Clash():
         self.file['proxy-groups']=[dict]+self.file['proxy-groups']
 
     def proxy_selector(self, pattern=None, reverse_select=False, proxies=None):
-        # mode can be select or reverse_select
         if proxies == None:
             all_proxies = [i['name'] for i in self.file['proxies']]
         else:
             all_proxies=proxies
+        if pattern == None:
+            return all_proxies
         result = []
         if reverse_select:
             for i in all_proxies:
