@@ -6,7 +6,9 @@ from copy import deepcopy
 class Clash():
     def __init__(self, url):
         self.url = url
-        self.content = requests.get(url).text.encode('utf-8')
+        res = requests.get(url)
+        self.content = res.text.encode('utf-8')
+        self.sub_info = {'subscription-userinfo': res.headers['subscription-userinfo']}
         self.file = yaml.load(self.content, Loader=yaml.Loader)
 
     # def replace(self, old, new):
