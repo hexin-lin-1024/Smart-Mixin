@@ -1,6 +1,6 @@
 # ClashConfigProcesser  
 
-## 一个开源的Clash YAML 配置预处理器。  
+## 一个开源的Clash配置预处理器。  
 
 这里是文档。  
 
