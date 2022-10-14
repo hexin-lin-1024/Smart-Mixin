@@ -3,6 +3,24 @@ import yaml
 import re
 
 
+class LIST(list):
+    def __init__(self):
+        list.__init__([])
+
+    def append(self, __object):
+        __object.bind(self)
+        return super().append(__object)
+
+    def insert(self, __index, __object):
+        __object.bind(self)
+        return super().insert(__index, __object)
+
+    def extend(self, __iterable):
+        for i in __iterable:
+            i.bind(self)
+        return super().extend(__iterable)
+
+
 def select_all(obj, reverse=False, **kwargs):
     result = []
     for i in obj:
@@ -42,6 +60,14 @@ def select(obj, reverse=False, **kwargs):
     return None
 
 
+def pop_front(obj, item):
+    obj.insert(0, item)
+
+
+def pop_back(obj, item):
+    obj.append(item)
+
+
 class Proxy:
     def __init__(self, DICT=None, YAML=None, proxies_list=None, proxy_groups_list=None):
         if DICT:
@@ -50,7 +76,6 @@ class Proxy:
             self.DICT = yaml.load(YAML.encode("utf-8"), Loader=yaml.Loader)[0]
         else:
             raise ValueError
-        self.name = self.DICT["name"]
 
         def _bind(proxies_list=None, proxy_groups_list=None):
             if not proxies_list == None:
@@ -68,19 +93,22 @@ class Proxy:
 
         self.__bind__(proxies_list, proxy_groups_list)
 
-    def rename(self, name):
-        self.name = name
+    @property
+    def name(self):
+        return self.DICT["name"]
+
+    @name.setter
+    def name(self, name):
         self.DICT["name"] = name
 
     def bind(self, proxies_list, proxy_groups_list=None):
         self.__bind__(proxies_list, proxy_groups_list)
 
     def delete(self):
-        raise RuntimeError("To Do: Active Sync")
         if self.proxy_groups_list_len:
             tmp_length = self.proxy_groups_list_len()
             for i in range(0, self.proxy_groups_list_len()):
-                if i == tmp_length:
+                if i >= tmp_length:
                     break
                 for j in self.proxy_groups_list_getitem(i).proxies:
                     if j.name == self.name:
@@ -88,38 +116,29 @@ class Proxy:
                 tmp_length = self.proxy_groups_list_len()
         if self.proxies_list_remove:
             self.proxies_list_remove(self)
-    
-    def dump(self):
-        return self.DICT
 
 
 class Config():
     def __init__(self, url=None, YAML=None, path=None):
+        self.Proxies = []
+        self.ProxyGroups = []
+        self.Rules = []
+        # self._DICT = {}
+
         if url:
             res = requests.get(url)
             self.sub_info = {
                 "subscription-userinfo": res.headers["subscription-userinfo"]}
-            self.file = yaml.load(res.text.encode("utf-8"), Loader=yaml.Loader)
+            self.YAML = res.text
         elif YAML:
-            self.file = yaml.load(YAML.encode("utf-8"), Loader=yaml.Loader)
+            self.YAML = YAML
         elif path:
-            self.file = yaml.load("\n".join(open(path, "r").readlines()).encode(
-                "utf-8"), Loader=yaml.Loader)
+            self.YAML = "\n".join(open(path, "r").readlines())
         else:
             raise ValueError
 
-        self.Proxies = []
-        self.ProxyGroups = []
-        self.Rules = []
-        for i in self.file["proxy-groups"]:
-            self.ProxyGroups.append(ProxyGroup(DICT=i, config=self))
-        for i in self.file["proxies"]:
-            self.Proxies.append(
-                Proxy(DICT=i, proxies_list=self.Proxies, proxy_groups_list=self.ProxyGroups))
-        for i in self.file["rules"]:
-            self.Rules.append(Rule(YAML=i, config=self))
-
     def getProxies(self, groups=False, embedded=False):
+        # 这里的绑定需要考虑
         result = self.Proxies
         if groups:
             result += [Proxy(DICT={"name": i.name}, proxies_list=result)
@@ -128,9 +147,6 @@ class Config():
             result += [Proxy(DICT={"name": "DIRECT"}, proxies_list=result),
                        Proxy(DICT={"name": "REJECT"}, proxies_list=result)]
         return result
-
-    def insert(self, obj, i, item):
-        obj.insert(i, item)
 
     def cover(self, YAML=None, DICT=None):
         raise RuntimeError("To Do")
@@ -141,17 +157,31 @@ class Config():
         else:
             raise ValueError
 
-    def pop_front(self, obj, item):
-        obj.insert(0, item)
+    @property
+    def DICT(self):
+        self._DICT["proxies"] = [i.DICT for i in self.Proxies]
+        self._DICT["proxy-groups"] = [i.DICT for i in self.ProxyGroups]
+        self._DICT["rules"] = [i.YAML for i in self.Rules]
+        return self._DICT
 
-    def pop_back(self, obj, item):
-        obj.append(item)
+    @DICT.setter
+    def DICT(self, DICT):
+        self._DICT = DICT
+        for i in self._DICT["proxy-groups"]:
+            self.ProxyGroups.append(ProxyGroup(DICT=i, config=self))
+        for i in self._DICT["proxies"]:
+            self.Proxies.append(
+                Proxy(DICT=i, proxies_list=self.Proxies, proxy_groups_list=self.ProxyGroups))
+        for i in self._DICT["rules"]:
+            self.Rules.append(Rule(YAML=i, config=self))
 
-    def dump(self):
-        self.file["proxies"] = [i.dump() for i in self.Proxies]
-        self.file["proxy-groups"] = [i.dump() for i in self.ProxyGroups]
-        self.file["rules"] = [i.dump() for i in self.Rules]
-        return yaml.dump(self.file)
+    @property
+    def YAML(self):
+        return yaml.dump(self.DICT)
+
+    @YAML.setter
+    def YAML(self, YAML):
+        self.DICT = yaml.load(YAML.encode("utf-8"), Loader=yaml.Loader)
 
 
 class ProxyGroup():
@@ -162,61 +192,78 @@ class ProxyGroup():
             self.DICT = yaml.load(YAML.encode("utf-8"), Loader=yaml.Loader)
         else:
             raise ValueError
-        self.name = DICT["name"]
-        self.proxies = []
-        self.proxies = [
-            Proxy(DICT={"name": i}, proxies_list=self.proxies) for i in DICT["proxies"]]
-        for i in self.proxies:
-            i.bind(self.proxies)
 
         def _bind(config):
             if not config == None:
                 self.proxy_groups_list_remove = config.ProxyGroups.remove
+                self.proxy_groups_list_getitem = config.ProxyGroups.__getitem__
+                self.proxy_groups_list_len = config.ProxyGroups.__len__
                 self.rules_list_getitem = config.Rules.__getitem__
                 self.rules_list_len = config.Rules.__len__
             else:
                 self.proxy_groups_list_remove = None
+                self.proxy_groups_list_getitem = None
+                self.proxy_groups_list_len = None
                 self.rules_getitem = None
                 self.rules_list_len = None
         self.__bind__ = _bind
 
         self.__bind__(config)
 
-    def rename(self, name):
-        self.name = name
-        self.DICT["name"] = name
+    @property
+    def proxies(self):
+        return self._proxies
 
-    def getProxy(self, ):
-        return self.proxies
+    @proxies.setter
+    def proxies(self, proxies):
+        self._proxies = proxies
+        for i in self._proxies:
+            i.bind(self._proxies)
 
-    def modifyProxies(self, proxies):
-        self.proxies = proxies
-        self.DICT["proxies"] = [i.name for i in proxies]
+    @property
+    def DICT(self):
+        self._DICT["proxies"] = [i.name for i in self._proxies]
+        return self._DICT
+
+    @DICT.setter
+    def DICT(self, DICT):
+        self._DICT = DICT
+        self.proxies = [Proxy(DICT={"name": i}) for i in self._DICT["proxies"]]
+
+    @property
+    def name(self):
+        return self._DICT["name"]
+
+    @name.setter
+    def name(self, name):
+        self._DICT["name"] = name
 
     def bind(self, config):
         self.__bind__(config)
 
     def delete(self, strategy=None):
-        raise RuntimeError("To Do: Check and detele self from other proxy-groups")
-        if not strategy == None:
+        if strategy == None:
             if self.rules_list_len:
                 tmp_length = self.rules_list_len()
-                for i in range(0, self.rules_list_len()):
-                    if i == tmp_length:
+                for i in range(0, tmp_length):
+                    if i >= tmp_length:
                         break
                     self.rules_list_getitem(i).delete()
                     tmp_length = self.rules_list_len()
         else:
             if self.rules_list_len:
                 for i in range(0, self.rules_list_len()):
-                    self.rules_list_getitem(i).modify(strategy=strategy)
+                    self.rules_list_getitem(i).strategy = strategy
+
         if self.proxy_groups_list_remove:
             self.proxy_groups_list_remove(self)
-    
-    def dump(self):
-        raise RuntimeError("To Do")
-        self.DICT["proxies"] = [i.name for i in self.proxies]
-        return self.DICT
+
+        if self.proxy_groups_list_len:
+            for i in range(0, self.proxy_groups_list_len()):
+                tmp = select(self.proxy_groups_list_getitem(
+                    i).proxies, False, name=self.name)
+                if tmp:
+                    tmp.delete()
 
 
 class Rule():
@@ -228,20 +275,7 @@ class Rule():
             self.matchedTraffic = matchedTraffic
             self.strategy = strategy
         else:
-            tmp = YAML.split(",")
-            if len(tmp) == 3:
-                self.type = tmp[0]
-                self.matchedTraffic = tmp[1]
-                self.strategy = tmp[2]
-            else:
-                self.type = None
-                self.matchedTraffic = tmp[0]
-                self.strategy = tmp[1]
-
-        if not self.type == None:
-            self.YAML = self.type + "," + self.matchedTraffic + "," + self.strategy
-        else:
-            self.YAML = self.matchedTraffic + "," + self.strategy
+            self.YAML = YAML
 
         def _bind(config):
             if not config == None:
@@ -252,26 +286,24 @@ class Rule():
 
         self.__bind__(config)
 
-    def modify(self, type=None, matchedTraffic=None, strategy=None, YAML=None):
-        if type == None and matchedTraffic == None and strategy == None and YAML == None:
-            raise ValueError
-        elif not YAML == None:
-            tmp = YAML.split(",")
+    @property
+    def YAML(self):
+        if not self.type == None:
+            return self.type + "," + self.matchedTraffic + "," + self.strategy
+        else:
+            return self.matchedTraffic + "," + self.strategy
+
+    @YAML.setter
+    def YAML(self, YAML):
+        tmp = YAML.split(",")
+        if len(tmp) == 3:
             self.type = tmp[0]
             self.matchedTraffic = tmp[1]
             self.strategy = tmp[2]
         else:
-            if not type == None:
-                self.type = type
-            if not matchedTraffic == None:
-                self.matchedTraffic = matchedTraffic
-            if not strategy == None:
-                self.strategy = strategy
-
-        if not self.type == None:
-            self.YAML = self.type + "," + self.matchedTraffic + "," + self.strategy
-        else:
-            self.YAML = self.matchedTraffic + "," + self.strategy
+            self.type = None
+            self.matchedTraffic = tmp[0]
+            self.strategy = tmp[1]
 
     def bind(self, config):
         self.__bind__(config)
@@ -279,6 +311,3 @@ class Rule():
     def delete(self):
         if self.rules_list_remove:
             self.rules_list_remove(self)
-
-    def dump(self):
-        return self.YAML
