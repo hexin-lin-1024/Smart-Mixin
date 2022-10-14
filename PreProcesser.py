@@ -3,7 +3,24 @@ import yaml
 import re
 
 
-class LIST(list):
+class plist(list):
+    def __init__(self):
+        list.__init__([])
+
+    def append(self, __object):
+        __object.bind(self)
+        return super().append(__object)
+
+    def insert(self, __index, __object):
+        __object.bind(self)
+        return super().insert(__index, __object)
+
+    def extend(self, __iterable):
+        for i in __iterable:
+            i.bind(self)
+        return super().extend(__iterable)
+
+class pglist(list):
     def __init__(self):
         list.__init__([])
 
