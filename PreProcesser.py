@@ -231,8 +231,11 @@ class Config():
 
         if url:
             res = requests.get(url)
-            self.sub_info = {
-                "subscription-userinfo": res.headers["subscription-userinfo"]}
+            try:
+                self.sub_info = {
+                    "subscription-userinfo": res.headers["subscription-userinfo"]}
+            except:
+                pass
             self.YAML = res.text
         elif YAML:
             self.YAML = YAML
@@ -371,7 +374,7 @@ class ProxyGroup():
 
 
 class Rule():
-    def __init__(self, type=None, matchedTraffic=None, strategy=None, YAML=None, config=None):
+    def __init__(self, type=None, matchedTraffic=None, strategy=None, YAML=None):
         if (type == None or matchedTraffic == None or strategy == None) and YAML == None:
             raise ValueError
         elif YAML == None:
