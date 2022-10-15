@@ -24,7 +24,7 @@ class SELECT_ALL(list):
                 self.__setattr__(i, call_func)
 
 
-class plist(list):
+class proxy_list(list):
     def __init__(self):
         list.__init__([])
 
@@ -42,7 +42,7 @@ class plist(list):
         return super().extend(__iterable)
 
 
-class pglist(list):
+class group_proxy_list(list):
     def __init__(self):
         list.__init__([])
 
