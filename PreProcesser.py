@@ -1,6 +1,27 @@
 import requests
 import yaml
 import re
+import inspect
+
+
+class SELECT_ALL(list):
+    def __init__(self, li):
+        list.__init__([])
+        super().extend(li)
+        built_in = ['__module__', '__init__', '__dict__', '__weakref__', '__doc__', '__repr__', '__hash__', '__str__', '__getattribute__', '__setattr__', '__delattr__', '__lt__', '__le__',
+                    '__eq__', '__ne__', '__gt__', '__ge__', '__new__', '__reduce_ex__', '__reduce__', '__subclasshook__', '__init_subclass__', '__format__', '__sizeof__', '__dir__', '__class__']
+
+        def call_func(**kwargs):
+            func_name = inspect.stack()[1][4][0]
+            func_name = func_name[func_name.rfind("select_all"):]
+            func_name = func_name[func_name.find(").") + 2:]
+            func_name = func_name[:func_name.find("(")]
+            for i in self:
+                i.__getattribute__(func_name)(**kwargs)
+        
+        for i in li[0].__dir__():
+            if hasattr(li[0].__getattribute__(i), '__call__') and i not in built_in:
+                self.__setattr__(i, call_func)
 
 
 class plist(list):
@@ -19,6 +40,7 @@ class plist(list):
         for i in __iterable:
             i.bind(self)
         return super().extend(__iterable)
+
 
 class pglist(list):
     def __init__(self):
@@ -55,7 +77,7 @@ def select_all(obj, reverse=False, **kwargs):
             result.append(i)
         elif not tmp and reverse:
             result.append(i)
-    return result
+    return SELECT_ALL(result)
 
 
 def select(obj, reverse=False, **kwargs):
