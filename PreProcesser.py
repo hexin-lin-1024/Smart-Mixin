@@ -18,45 +18,83 @@ class SELECT_ALL(list):
             func_name = func_name[:func_name.find("(")]
             for i in self:
                 i.__getattribute__(func_name)(**kwargs)
-        
+
         for i in li[0].__dir__():
             if hasattr(li[0].__getattribute__(i), '__call__') and i not in built_in:
                 self.__setattr__(i, call_func)
 
 
 class ConfigProxies(list):
-    def __init__(self):
+    def __init__(self, proxy_groups_list, __iterable=None):
         list.__init__([])
+        self.proxy_groups_list_getitem = proxy_groups_list.__getitem__
+        self.proxy_groups_list_len = proxy_groups_list.__len__
+        if not __iterable == None:
+            for i in __iterable:
+                i.proxies_list_remove = self.remove
+                i.proxy_groups_list_getitem = self.proxy_groups_list_getitem
+                i.proxy_groups_list_len = self.proxy_groups_list_len
+            super().extend(__iterable)
 
     def append(self, __object):
-        __object.bind(self)
+        __object.proxies_list_remove = self.remove
+        __object.proxy_groups_list_getitem = self.proxy_groups_list_getitem
+        __object.proxy_groups_list_len = self.proxy_groups_list_len
         return super().append(__object)
 
     def insert(self, __index, __object):
-        __object.bind(self)
+        __object.proxies_list_remove = self.remove
+        __object.proxy_groups_list_getitem = self.proxy_groups_list_getitem
+        __object.proxy_groups_list_len = self.proxy_groups_list_len
         return super().insert(__index, __object)
 
     def extend(self, __iterable):
         for i in __iterable:
-            i.bind(self)
+            i.proxies_list_remove = self.remove
+            i.proxy_groups_list_getitem = self.proxy_groups_list_getitem
+            i.proxy_groups_list_len = self.proxy_groups_list_len
         return super().extend(__iterable)
+
 
 class ConfigProxyGroups(list):
-    def __init__(self):
+    def __init__(self, rules_list, __iterable=None):
         list.__init__([])
+        self.rules_list_getitem = rules_list.__getitem__
+        self.rules_list_len = rules_list.__len__
+        if not __iterable == None:
+            for i in __iterable:
+                i.proxy_groups_list_remove = self.remove
+                i.proxy_groups_list_getitem = self.__getitem__
+                i.proxy_groups_list_len = self.__len__
+                i.rules_list_getitem = self.rules_list_getitem
+                i.rules_list_len = self.rules_list_len
+            super().extend(__iterable)
 
     def append(self, __object):
-        __object.bind(self)
+        __object.proxy_groups_list_remove = self.remove
+        __object.proxy_groups_list_getitem = self.__getitem__
+        __object.proxy_groups_list_len = self.__len__
+        __object.rules_list_getitem = self.rules_list_getitem
+        __object.rules_list_len = self.rules_list_len
         return super().append(__object)
 
     def insert(self, __index, __object):
-        __object.bind(self)
+        __object.proxy_groups_list_remove = self.remove
+        __object.proxy_groups_list_getitem = self.__getitem__
+        __object.proxy_groups_list_len = self.__len__
+        __object.rules_list_getitem = self.rules_list_getitem
+        __object.rules_list_len = self.rules_list_len
         return super().insert(__index, __object)
 
     def extend(self, __iterable):
         for i in __iterable:
-            i.bind(self)
+            i.proxy_groups_list_remove = self.remove
+            i.proxy_groups_list_getitem = self.__getitem__
+            i.proxy_groups_list_len = self.__len__
+            i.rules_list_getitem = self.rules_list_getitem
+            i.rules_list_len = self.rules_list_len
         return super().extend(__iterable)
+
 
 class ConfigRules(list):
     def __init__(self, __iterable=None):
@@ -79,25 +117,34 @@ class ConfigRules(list):
             i.rules_list_remove = self.remove
         return super().extend(__iterable)
 
+
 class ProxyGroupProxies(list):
     def __init__(self, __iterable=None):
         list.__init__([])
         if not __iterable == None:
             for i in __iterable:
-                i.bind(self)
+                i.proxies_list_remove = self.remove
+                i.proxy_groups_list_getitem = None
+                i.proxy_groups_list_len = None
             super().extend(__iterable)
 
     def append(self, __object):
-        __object.bind(self)
+        __object.proxies_list_remove = self.remove
+        __object.proxy_groups_list_getitem = None
+        __object.proxy_groups_list_len = None
         return super().append(__object)
 
     def insert(self, __index, __object):
-        __object.bind(self)
+        __object.proxies_list_remove = self.remove
+        __object.proxy_groups_list_getitem = None
+        __object.proxy_groups_list_len = None
         return super().insert(__index, __object)
 
     def extend(self, __iterable):
         for i in __iterable:
-            i.bind(self)
+            i.proxies_list_remove = self.remove
+            i.proxy_groups_list_getitem = None
+            i.proxy_groups_list_len = None
         return super().extend(__iterable)
 
 
@@ -149,29 +196,13 @@ def pop_back(obj, item):
 
 
 class Proxy:
-    def __init__(self, DICT=None, YAML=None, proxies_list=None, proxy_groups_list=None):
+    def __init__(self, DICT=None, YAML=None):
         if DICT:
             self.DICT = DICT
         elif YAML:
             self.DICT = yaml.load(YAML.encode("utf-8"), Loader=yaml.Loader)[0]
         else:
             raise ValueError
-
-        def _bind(proxies_list=None, proxy_groups_list=None):
-            if not proxies_list == None:
-                self.proxies_list_remove = proxies_list.remove
-            else:
-                self.proxies_list_remove = None
-
-            if not proxy_groups_list == None:
-                self.proxy_groups_list_getitem = proxy_groups_list.__getitem__
-                self.proxy_groups_list_len = proxy_groups_list.__len__
-            else:
-                self.proxy_groups_list_getitem = None
-                self.proxy_groups_list_len = None
-        self.__bind__ = _bind
-
-        self.__bind__(proxies_list, proxy_groups_list)
 
     @property
     def name(self):
@@ -181,30 +212,22 @@ class Proxy:
     def name(self, name):
         self.DICT["name"] = name
 
-    def bind(self, proxies_list, proxy_groups_list=None):
-        self.__bind__(proxies_list, proxy_groups_list)
-
     def delete(self):
         if self.proxy_groups_list_len:
-            tmp_length = self.proxy_groups_list_len()
-            for i in range(0, self.proxy_groups_list_len()):
-                if i >= tmp_length:
-                    break
+            for i in range(self.proxy_groups_list_len() - 1, -1, -1):
                 for j in self.proxy_groups_list_getitem(i).proxies:
                     if j.name == self.name:
                         j.delete()
-                tmp_length = self.proxy_groups_list_len()
         if self.proxies_list_remove:
             self.proxies_list_remove(self)
 
 
 class Config():
     def __init__(self, url=None, YAML=None, path=None):
-        self.Proxies = []
-        self.ProxyGroups = []
-        self.Rules = []
-        # self._Rules = ConfigRules()
-        # self._DICT = {}
+        self._Rules = ConfigRules()
+        self._ProxyGroups = ConfigProxyGroups(self.Rules)
+        self._Proxies = ConfigProxies(self.ProxyGroups)
+        self._DICT = {}
 
         if url:
             res = requests.get(url)
@@ -217,16 +240,31 @@ class Config():
             self.YAML = "\n".join(open(path, "r").readlines())
         else:
             raise ValueError
-            
-    # @property
-    # def Rules(self):
-    #     return self._Rules
 
-    # @Rules.setter
-    # def Rules(self, Rules):
-    #     print(Rules)
-    #     self._Rules = ConfigRules(Rules)
-    
+    @property
+    def Proxies(self):
+        return self._Proxies
+
+    @Proxies.setter
+    def Proxies(self, Proxies):
+        self._Proxies = ConfigProxies(self.ProxyGroups, Proxies)
+
+    @property
+    def ProxyGroups(self):
+        return self._ProxyGroups
+
+    @ProxyGroups.setter
+    def ProxyGroups(self, ProxyGroups):
+        self._ProxyGroups = ConfigProxyGroups(self.Rules, ProxyGroups)
+
+    @property
+    def Rules(self):
+        return self._Rules
+
+    @Rules.setter
+    def Rules(self, Rules):
+        self._Rules = ConfigRules(Rules)
+
     def getProxies(self, groups=False, embedded=False):
         # 这里的绑定需要考虑
         result = self.Proxies
@@ -258,10 +296,10 @@ class Config():
     def DICT(self, DICT):
         self._DICT = DICT
         for i in self._DICT["proxy-groups"]:
-            self.ProxyGroups.append(ProxyGroup(DICT=i, config=self))
+            self.ProxyGroups.append(ProxyGroup(DICT=i))
         for i in self._DICT["proxies"]:
             self.Proxies.append(
-                Proxy(DICT=i, proxies_list=self.Proxies, proxy_groups_list=self.ProxyGroups))
+                Proxy(DICT=i))
         for i in self._DICT["rules"]:
             self.Rules.append(Rule(YAML=i, config=self))
 
@@ -275,30 +313,13 @@ class Config():
 
 
 class ProxyGroup():
-    def __init__(self, DICT=None, YAML=None, config=None):
+    def __init__(self, DICT=None, YAML=None):
         if DICT:
             self.DICT = DICT
         elif YAML:
             self.DICT = yaml.load(YAML.encode("utf-8"), Loader=yaml.Loader)
         else:
             raise ValueError
-
-        def _bind(config):
-            if not config == None:
-                self.proxy_groups_list_remove = config.ProxyGroups.remove
-                self.proxy_groups_list_getitem = config.ProxyGroups.__getitem__
-                self.proxy_groups_list_len = config.ProxyGroups.__len__
-                self.rules_list_getitem = config.Rules.__getitem__
-                self.rules_list_len = config.Rules.__len__
-            else:
-                self.proxy_groups_list_remove = None
-                self.proxy_groups_list_getitem = None
-                self.proxy_groups_list_len = None
-                self.rules_getitem = None
-                self.rules_list_len = None
-        self.__bind__ = _bind
-
-        self.__bind__(config)
 
     @property
     def proxies(self):
@@ -326,19 +347,12 @@ class ProxyGroup():
     def name(self, name):
         self._DICT["name"] = name
 
-    def bind(self, config):
-        self.__bind__(config)
-
     def delete(self, strategy=None):
         if strategy == None:
             if self.rules_list_len:
-                tmp_length = self.rules_list_len()
-                for i in range(0, tmp_length):
-                    if i >= tmp_length:
-                        break
+                for i in range(self.rules_list_len() - 1, -1, -1):
                     if self.rules_list_getitem(i).strategy == self.name:
                         self.rules_list_getitem(i).delete()
-                    tmp_length = self.rules_list_len()
         else:
             if self.rules_list_len:
                 for i in range(0, self.rules_list_len()):
@@ -349,7 +363,7 @@ class ProxyGroup():
             self.proxy_groups_list_remove(self)
 
         if self.proxy_groups_list_len:
-            for i in range(0, self.proxy_groups_list_len()):
+            for i in range(self.proxy_groups_list_len() - 1, -1, -1):
                 tmp = select(self.proxy_groups_list_getitem(
                     i).proxies, False, name=self.name)
                 if tmp:
@@ -366,15 +380,6 @@ class Rule():
             self.strategy = strategy
         else:
             self.YAML = YAML
-
-        def _bind(config):
-            if not config == None:
-                self.rules_list_remove = config.Rules.remove
-            else:
-                self.rules_list_remove = None
-        self.__bind__ = _bind
-
-        self.__bind__(config)
 
     @property
     def YAML(self):
@@ -394,9 +399,6 @@ class Rule():
             self.type = None
             self.matchedTraffic = tmp[0]
             self.strategy = tmp[1]
-
-    def bind(self, config):
-        self.__bind__(config)
 
     def delete(self):
         if self.rules_list_remove:
