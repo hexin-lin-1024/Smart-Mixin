@@ -122,6 +122,9 @@ pop_back(obj, item)
 当然也可以直接使用内置函数操作，这里展示两种等价的方法。  
 ```Python
 pop_back(CONF.Proxies, Shadowsocks)
+```
+通过内置函数操作：
+```Python
 CONF.Proxies.append(Shadowsocks)
 ```   
 ### 可用成员函数
