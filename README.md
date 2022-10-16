@@ -134,11 +134,11 @@ CONF.Proxies.append(Shadowsocks)
 
 注解：  
 1.包含代理组  
-2.包含`DIRECT`/`REJECT`等内置代理  
+2.包含 `DIRECT` / `REJECT` 等内置代理  
 3.尚未实现  
-4.如果该代理位于`Config.Proxy`中，将会从所有代理组中删除  
-5.也会从其他`ProxyGroup`中删除自身  
-6.默认为删除所有相关规则，若提供`strategy`代表将所有相关规则的目的地改写为该值  
+4.如果该代理位于 `Config.Proxy` 中，将会从所有代理组中删除  
+5.也会从其他 `ProxyGroup` 中删除自身  
+6.默认为删除所有相关规则，若提供 `strategy` 代表将所有相关规则的目的地改写为该值  
 
 ## 筛选
 框架提供了两个辅助筛选的函数
@@ -152,9 +152,9 @@ select_all(obj, reverse=False, **kwargs)
 #示例
 select_all(CONF.Proxies, reverse=False, re_name="Japan")
 ```
-`select`和`select_all`函数的语法一致，`obj`表示要从中查找的可迭代对象，`reverse`是否反向选择，后面是对象的任意属性（查找规则），由`re_`前缀开头时，以正则表达式方式查找。  
-在有多个符合条件的对象时，`select`函数返回有最小索引值的一个；  
-`select_all`函数返回一个SELECT_ALL对象(继承自列表)，包含全部符合条件的对象，且有一个特殊语法：
+`select` 和 `select_all` 函数的语法一致， `obj` 表示要从中查找的可迭代对象， `reverse` 是否反向选择，后面是对象的任意属性（查找规则），由 `re_` 前缀开头时，以正则表达式方式查找。  
+在有多个符合条件的对象时， `select` 函数返回有最小索引值的一个；  
+`select_all` 函数返回一个 `SELECT_ALL` 对象(继承自列表)，包含全部符合条件的对象，且有一个特殊语法：
 ```Python
 select_all(CONF.Proxies, reverse=False, re_name="Japan").delete()
 ```
@@ -178,8 +178,7 @@ select_all(c.getProxies(), False, re_name="Premium").delete()
 select(c.getProxies(), False, re_name=" | ").delete()
 select(c.getProxies(), False, re_name="Traffic Reset").delete()
 select(c.getProxies(), False, re_name="Expire Date").delete()
-aa = ProxyGroup(
-    DICT={'name': 'aa', 'url': 'https://cp.cloudflare.com/generate_204', 'type': 'select', 'proxies': []})
+aa = ProxyGroup(DICT={'name': 'aa', 'url': 'https://cp.cloudflare.com/generate_204', 'type': 'select', 'proxies': []})
 Shadowsocks = Proxy(DICT={'name': '🇨🇳 Shadowsocks', 'type': 'ss', 'server': 's.example.com', 'port': '12345', 'cipher': 'chacha20-ietf-poly1305', 'udp': True, 'password': 'PassWD', 'plugin': 'obfs', 'plugin-opts': {'host': '6d1af65d074041a0.swcdn.apple.com', 'mode': 'http'}})
 Trojan = Proxy(DICT={'name': '🇨🇳 Trojan', 'type': 'trojan', 'server': 't.example.com', 'port': '54321', 'udp': True, 'password': 'PassWD', 'skip-cert-verify': True, 'sni': 't.example.com'})
 aa.proxies = [Shadowsocks, Trojan]
