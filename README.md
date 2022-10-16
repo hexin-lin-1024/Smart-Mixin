@@ -1,4 +1,4 @@
-# ClashConfigProcesser  
+# SmartMixin  
 
 ## 一个开源的Clash配置预处理器。  
 
