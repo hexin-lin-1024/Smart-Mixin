@@ -118,36 +118,6 @@ class ConfigRules(list):
         return super().extend(__iterable)
 
 
-# class ProxyGroupProxies(list):
-#     def __init__(self, __iterable=None):
-#         list.__init__([])
-#         if not __iterable == None:
-#             for i in __iterable:
-#                 i.proxies_list_remove = self.remove
-#                 i.proxy_groups_list_getitem = None
-#                 i.proxy_groups_list_len = None
-#             super().extend(__iterable)
-
-#     def append(self, __object):
-#         __object.proxies_list_remove = self.remove
-#         __object.proxy_groups_list_getitem = None
-#         __object.proxy_groups_list_len = None
-#         return super().append(__object)
-
-#     def insert(self, __index, __object):
-#         __object.proxies_list_remove = self.remove
-#         __object.proxy_groups_list_getitem = None
-#         __object.proxy_groups_list_len = None
-#         return super().insert(__index, __object)
-
-#     def extend(self, __iterable):
-#         for i in __iterable:
-#             i.proxies_list_remove = self.remove
-#             i.proxy_groups_list_getitem = None
-#             i.proxy_groups_list_len = None
-#         return super().extend(__iterable)
-
-
 def select_all(obj, reverse=False, **kwargs):
     result = []
     for i in obj:
@@ -213,18 +183,18 @@ class Proxy:
         foregone = self.DICT["name"]
         self.DICT["name"] = name
         for i in range(self.proxy_groups_list_len() - 1, -1, -1):
-                for j in self.proxy_groups_list_getitem(i).proxies:
-                    if j.name == foregone:
-                        j.name = name
+            for j in self.proxy_groups_list_getitem(i).proxies:
+                if j.name == foregone:
+                    j.name = name
 
     def delete(self):
+        if self.proxies_list_remove:
+            self.proxies_list_remove(self)
         if self.proxy_groups_list_len:
             for i in range(self.proxy_groups_list_len() - 1, -1, -1):
                 for j in self.proxy_groups_list_getitem(i).proxies:
                     if j.name == self.name:
                         j.delete()
-        if self.proxies_list_remove:
-            self.proxies_list_remove(self)
 
 
 class Config():
@@ -305,11 +275,15 @@ class Config():
         self._DICT = DICT
         for i in self._DICT["proxy-groups"]:
             self.ProxyGroups.append(ProxyGroup(DICT=i))
+            for j in self.ProxyGroups[len(self.ProxyGroups) - 1].proxies:
+                j.proxy_groups_list_getitem = self.ProxyGroups.__getitem__
+                j.proxy_groups_list_len = self.ProxyGroups.__len__
+
         for i in self._DICT["proxies"]:
             self.Proxies.append(
                 Proxy(DICT=i))
         for i in self._DICT["rules"]:
-            self.Rules.append(Rule(YAML=i, config=self))
+            self.Rules.append(Rule(YAML=i))
 
     @property
     def YAML(self):
@@ -336,8 +310,6 @@ class ProxyGroup():
     @proxies.setter
     def proxies(self, proxies):
         self._proxies = ConfigProxies([], proxies)
-        self._proxies.proxy_groups_list_getitem = self.proxy_groups_list_getitem
-        self._proxies.proxy_groups_list_len = self.proxy_groups_list_len
 
     @property
     def DICT(self):
