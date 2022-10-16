@@ -83,11 +83,35 @@ R = Rule("DOMAIN-SUFFIX", "Apple.com", "\U0001F34E Apple")
 R = Rule(YAML="DOMAIN-SUFFIX,Apple.com,\U0001F34E Apple")
 ```  
 
-## 绑定与添加
+## 绑定与修改
 ### 绑定
-在2.0的前几次迭代中，笔者曾打算为对象加上绑定函数，让用户自行绑定，但是这无疑违背了简洁方便的原则。故笔者用继承实现了自动绑定，当对象通过任何方式添加时，它们将自动被绑定。
-### 添加
-文件也提供了两个函数方便用户添加：  
+在2.0的前几次迭代中，笔者曾打算为对象加上绑定函数，让用户自行绑定，但是这无疑违背了简洁方便的原则。故笔者用继承实现了自动绑定，当对象通过任何方式添加时，它们将自动被绑定。  
+
+### 属性
+可以直接给对象特定属性赋值来修改，此表格为可用(其他属性不建议操作)属性：  
+Config 相关属性不建议直接修改  
+|对象类型|对象属性|接受的值|
+|---|---|---
+|Config|DICT|字典
+|Config|YAML|字符串<sup>1</sup>
+|Config|Proxies|全部代理的列表
+|Config|ProxyGroups|代理组的列表
+|Config|Rules|规则列表
+|Proxy|name|名称(字符串)<sup>2</sup>(尚未实现)
+|ProxyGroup|DICT|字典
+|ProxyGroup|name|名称(字符串)<sup>2</sup>
+|ProxyGroup|proxies|包含的代理\[\<Proxy object\>\]
+|Rule<sup>3</sup>|YAML|字符串
+|Rule|type|字符串
+|Rule|matchedTraffic|字符串
+|Rule|strategy|字符串|
+
+注解：  
+1.相当于重新加载配置文件  
+2.改动会引起全局的名称修改  
+3.约定一个Rule的YAML组成如下 `type, matchedTraffic, strategy`
+
+框架也提供了两个函数方便用户修改：  
 ```Python
 pop_front(obj, item)
 ```
@@ -99,4 +123,80 @@ pop_back(obj, item)
 ```Python
 pop_back(CONF.Proxies, Shadowsocks)
 CONF.Proxies.append(Shadowsocks)
-``` 
+```   
+### 可用成员函数
+|对象类型|函数名称|函数作用|接受的参数|返回值|
+|---|---|---|---|---
+|Config|getProxies|获取所有代理|groups<sup>1</sup>=False, embedded<sup>2</sup>=False|\[\<object Proxy\>\]
+|Config|mixin<sup>3</sup>|Mixin功能(类似于CFW的Mixin)|？|无返回值
+|Proxy|delete|删除自身<sup>4</sup>|不接受参数|无返回值
+|ProxyGroup|delete|删除自身<sup>5</sup>|strategy=None<sup>6</sup>|无返回值|
+
+注解：  
+1.包含代理组  
+2.包含`DIRECT`/`REJECT`等内置代理  
+3.尚未实现  
+4.如果该代理位于`Config.Proxy`中，将会从所有代理组中删除  
+5.也会从其他`ProxyGroup`中删除自身  
+6.默认为删除所有相关规则，若提供`strategy`代表将所有相关规则的目的地改写为该值  
+
+## 筛选
+框架提供了两个辅助筛选的函数
+```Python
+select(obj, reverse=False, **kwargs)
+#示例
+select(CONF.Proxies, reverse=False, name="Japan 16")
+```
+```Python
+select_all(obj, reverse=False, **kwargs)
+#示例
+select_all(CONF.Proxies, reverse=False, re_name="Japan")
+```
+`select`和`select_all`函数的语法一致，`obj`表示要从中查找的可迭代对象，`reverse`是否反向选择，后面是对象的任意属性（查找规则），由`re_`前缀开头时，以正则表达式方式查找。  
+在有多个符合条件的对象时，`select`函数返回有最小索引值的一个；  
+`select_all`函数返回一个SELECT_ALL对象(继承自列表)，包含全部符合条件的对象，且有一个特殊语法：
+```Python
+select_all(CONF.Proxies, reverse=False, re_name="Japan").delete()
+```
+等价于
+```Python
+r = select_all(CONF.Proxies, reverse=False, re_name="Japan")
+for i in r:
+  i.delete()
+```
+
+## 框架使用例
+```Python
+CONF = Config(url=r"https://example.com/example.yaml")
+aa = [
+    'DOMAIN-SUFFIX,example.com,aa',
+    'DOMAIN-SUFFIX,example.net,aa'
+]
+for i in aa:
+    pop_front(c.Rules, Rule(YAML=i, config=c))
+select_all(c.getProxies(), False, re_name="Premium").delete()
+select(c.getProxies(), False, re_name=" | ").delete()
+select(c.getProxies(), False, re_name="Traffic Reset").delete()
+select(c.getProxies(), False, re_name="Expire Date").delete()
+aa = ProxyGroup(
+    DICT={'name': 'aa', 'url': 'https://cp.cloudflare.com/generate_204', 'type': 'select', 'proxies': []})
+Shadowsocks = Proxy(DICT={'name': '🇨🇳 Shadowsocks', 'type': 'ss', 'server': 's.example.com', 'port': '12345', 'cipher': 'chacha20-ietf-poly1305', 'udp': True, 'password': 'PassWD', 'plugin': 'obfs', 'plugin-opts': {'host': '6d1af65d074041a0.swcdn.apple.com', 'mode': 'http'}})
+Trojan = Proxy(DICT={'name': '🇨🇳 Trojan', 'type': 'trojan', 'server': 't.example.com', 'port': '54321', 'udp': True, 'password': 'PassWD', 'skip-cert-verify': True, 'sni': 't.example.com'})
+aa.proxies = [Shadowsocks, Trojan]
+pop_back(c.Proxies, Shadowsocks)
+pop_back(c.Proxies, Trojan)
+pop_back(c.ProxyGroups, aa)
+select_all(c.Rules, False, strategy="REJECT").delete()
+select(c.ProxyGroups, False, name="Hijacking").delete(strategy="REJECT")
+select(c.ProxyGroups, False, name="\U0001F3AC myTVSUPER").delete()
+select(c.ProxyGroups, False, name="\U0001F3AC Emby").delete()
+select(c.ProxyGroups, False, name="\U0001F4F2 LineTV").delete()
+select(c.ProxyGroups, False, name="\U0001F3AC iQiyi").delete()
+select(c.ProxyGroups, False, name="\U0001F4DF Twitter").delete()
+select(c.ProxyGroups, False, name="\U0001F4FA Disney").delete()
+select(c.ProxyGroups, False, name="\U0001F4FA Netflix").delete()
+select(c.ProxyGroups, False, name="\U0001F3B5 Tiktok").delete()
+select(c.ProxyGroups, False, name="\U0001F310 Google").delete()
+with open("RES.yaml", "w") as f:
+    f.write(c.YAML)
+```
