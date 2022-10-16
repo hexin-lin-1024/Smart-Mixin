@@ -176,7 +176,7 @@ aa = [
     'DOMAIN-SUFFIX,example.net,aa'
 ]
 for i in aa:
-    pop_front(c.Rules, Rule(YAML=i, config=c))
+    pop_front(c.Rules, Rule(YAML=i))
 select_all(c.getProxies(), False, re_name="Premium").delete()
 select(c.getProxies(), False, re_name=" | ").delete()
 select(c.getProxies(), False, re_name="Traffic Reset").delete()
