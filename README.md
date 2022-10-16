@@ -97,7 +97,7 @@ Config 相关属性不建议直接修改
 |Config|Proxies|全部代理的列表
 |Config|ProxyGroups|代理组的列表
 |Config|Rules|规则列表
-|Proxy|name|名称(字符串)<sup>2</sup>(尚未实现)
+|Proxy|name|名称(字符串)<sup>2</sup>
 |ProxyGroup|DICT|字典
 |ProxyGroup|name|名称(字符串)<sup>2</sup>
 |ProxyGroup|proxies|包含的代理\[\<Proxy object\>\]
