@@ -210,7 +210,12 @@ class Proxy:
 
     @name.setter
     def name(self, name):
+        foregone = self.DICT["name"]
         self.DICT["name"] = name
+        for i in range(self.proxy_groups_list_len() - 1, -1, -1):
+                for j in self.proxy_groups_list_getitem(i).proxies:
+                    if j.name == foregone:
+                        j.name = name
 
     def delete(self):
         if self.proxy_groups_list_len:
