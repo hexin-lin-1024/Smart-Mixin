@@ -1,10 +1,10 @@
-# Smart Mixin  
+# Smart-Mixin  
 
 ## 一个开源的Clash配置预处理器。  
 
 ## 2.0.0 正式发布!  
 
-更加面向对象，语法更加简洁，交互更为友好，新版本2.0.0已经正式发布；请前往[Release](https://github.com/hexin-lin-1024/SmartMixin/releases/tag/2.0.0)体验。  
+更加面向对象，语法更加简洁，交互更为友好，新版本2.0.0已经正式发布；请前往[Release](https://github.com/hexin-lin-1024/Smart-Mixin/releases/tag/2.0.0)体验。  
 在编写2.0的时候，程序经历了好几次重构；这些迭代都只为了一个目的，更简洁直观的操作。  
 
 ## 安装外部依赖
