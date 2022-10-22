@@ -255,13 +255,13 @@ class Config():
         return result
 
     def mixin(self, YAML=None, DICT=None):
-        raise RuntimeError("To Do")
         if DICT:
-            pass
+            YAML = yaml.dump(self.DICT)
         elif YAML:
-            tmp = yaml.load(YAML.encode("utf-8"), Loader=yaml.Loader)
+            pass
         else:
             raise ValueError
+        self.YAML = self.YAML + "\n" + YAML
 
     @property
     def DICT(self):
