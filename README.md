@@ -121,7 +121,7 @@ CONF.Proxies.append(Shadowsocks)
 ### 可用成员函数
 |对象类型|函数名称|函数作用|接受的参数|返回值|
 |---|---|---|---|---
-|`Config`|`getProxies`|获取所有代理|`groups`<sup>1</sup>` = False`, `embedded`<sup>2</sup>` = False`|`[<object Proxy>]`
+|`Config`|`getProxies`|获取所有代理|`groups = False`<sup>1</sup>, `embedded = False`<sup>2</sup>|`[<object Proxy>]`
 |`Config`|`mixin`|追加配置|`YAML` (字符串)或者 `DICT` (字典)|无返回值
 |`Proxy`|`delete`|删除自身<sup>4</sup>|不接受参数|无返回值
 |`ProxyGroup`|`delete`|删除自身<sup>5</sup>|`strategy = None`<sup>6</sup>|无返回值|
@@ -129,7 +129,7 @@ CONF.Proxies.append(Shadowsocks)
 注解：  
 1.包含代理组  
 2.包含 `DIRECT` / `REJECT` 等内置代理   
-3.类似于 `Clash For Windows` 的 `Mixin` ，可以起到覆盖已有配置的作用
+3.类似于 `Clash For Windows` 的 `Mixin` ，可以起到覆盖已有配置的作用  
 4.如果该代理位于 `Config.Proxy` 中，将会从所有代理组中删除  
 5.也会从其他 `ProxyGroup` 中删除自身  
 6.默认为删除所有相关规则，若提供 `strategy` 代表将所有相关规则的目的地改写为该值
