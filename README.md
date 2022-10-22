@@ -28,7 +28,7 @@ CONF = Config(YAML = """此处省略""")
 CONF = Config(path = r"./exp.yaml")
 ```
 ## 新建
-在2.0版本中，新建代理、代理组、规则的语法都发生了改变：
+在 `2.x` 版本中，新建代理、代理组、规则的语法都发生了改变：
 ### 新建代理
 ```Python
 Shadowsocks = Proxy(DICT={'name': '🇨🇳 Shadowsocks', 'type': 'ss', 'server': '127.0.0.1', 'port': '12345', 'cipher': 'chacha20-ietf-poly1305', 'udp': True, 'password': 'PassWD', 'plugin': 'obfs', 'plugin-opts': {'host': '6d1af65d074041a0.swcdn.apple.com', 'mode': 'http'}})
@@ -122,7 +122,7 @@ CONF.Proxies.append(Shadowsocks)
 |对象类型|函数名称|函数作用|接受的参数|返回值|
 |---|---|---|---|---
 |`Config`|`getProxies`|获取所有代理|`groups = False`<sup>1</sup>, `embedded = False`<sup>2</sup>|`[<object Proxy>]`
-|`Config`|`mixin`|追加配置|`YAML` (字符串)或者 `DICT` (字典)|无返回值
+|`Config`|`mixin`|追加配置|`YAML` (字符串) 或者 `DICT` (字典)|无返回值
 |`Proxy`|`delete`|删除自身<sup>4</sup>|不接受参数|无返回值
 |`ProxyGroup`|`delete`|删除自身<sup>5</sup>|`strategy = None`<sup>6</sup>|无返回值|
 
