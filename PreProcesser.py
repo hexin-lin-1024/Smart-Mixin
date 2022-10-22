@@ -181,11 +181,12 @@ class Proxy:
     @name.setter
     def name(self, name):
         foregone = self.DICT["name"]
-        self.DICT["name"] = name
-        for i in range(self.proxy_groups_list_len() - 1, -1, -1):
-            for j in self.proxy_groups_list_getitem(i).proxies:
-                if j.name == foregone:
-                    j.name = name
+        if not foregone == name:
+            self.DICT["name"] = name
+            for i in range(self.proxy_groups_list_len() - 1, -1, -1):
+                for j in self.proxy_groups_list_getitem(i).proxies:
+                    if j.name == foregone:
+                        j.name = name
 
     def delete(self):
         if self.proxies_list_remove:
@@ -327,7 +328,13 @@ class ProxyGroup():
 
     @name.setter
     def name(self, name):
-        self._DICT["name"] = name
+        foregone = self._DICT["name"]
+        if not foregone == name:
+            self._DICT["name"] = name
+            for i in range(self.proxy_groups_list_len() - 1, -1, -1):
+                for j in self.proxy_groups_list_getitem(i).proxies:
+                    if j.name == foregone:
+                        j.name = name
 
     def delete(self, strategy=None):
         if strategy == None:
