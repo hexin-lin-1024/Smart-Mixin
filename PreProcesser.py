@@ -320,7 +320,7 @@ class ProxyGroup():
     @DICT.setter
     def DICT(self, DICT):
         self._DICT = DICT
-        self.proxies = [Proxy(DICT={"name": i}) for i in self._DICT["proxies"]]
+        self.proxies = [Proxy(DICT={"name": i.name}) if isinstance(i, Proxy) else Proxy(DICT={"name": i}) for i in self._DICT["proxies"]]
 
     @property
     def name(self):
