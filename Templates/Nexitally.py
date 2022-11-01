@@ -1,0 +1,1899 @@
+from PreProcesser import *
+
+
+class Nexitally(Config):
+    def __init__(self, Url=None, YAML=None, File=None, Proxies=None):
+        super().__init__(YAML=r"""port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+allow-lan: false
+mode: Rule
+log-level: info
+ipv6: false
+hosts:
+  services.googleapis.cn: 216.58.200.67
+  www.google.cn: 216.58.200.67
+external-controller: '0.0.0.0:9090'
+clash-for-android:
+  append-system-dns: false
+profile:
+  tracing: true
+dns:
+  enable: true
+  listen: '127.0.0.1:8853'
+  default-nameserver:
+    - 223.5.5.5
+    - 1.0.0.1
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-filter:
+    - '*.lan'
+    - stun.*.*.*
+    - stun.*.*
+    - time.windows.com
+    - time.nist.gov
+    - time.apple.com
+    - time.asia.apple.com
+    - '*.ntp.org.cn'
+    - '*.openwrt.pool.ntp.org'
+    - time1.cloud.tencent.com
+    - time.ustc.edu.cn
+    - pool.ntp.org
+    - ntp.ubuntu.com
+    - ntp.aliyun.com
+    - ntp1.aliyun.com
+    - ntp2.aliyun.com
+    - ntp3.aliyun.com
+    - ntp4.aliyun.com
+    - ntp5.aliyun.com
+    - ntp6.aliyun.com
+    - ntp7.aliyun.com
+    - time1.aliyun.com
+    - time2.aliyun.com
+    - time3.aliyun.com
+    - time4.aliyun.com
+    - time5.aliyun.com
+    - time6.aliyun.com
+    - time7.aliyun.com
+    - '*.time.edu.cn'
+    - time1.apple.com
+    - time2.apple.com
+    - time3.apple.com
+    - time4.apple.com
+    - time5.apple.com
+    - time6.apple.com
+    - time7.apple.com
+    - time1.google.com
+    - time2.google.com
+    - time3.google.com
+    - time4.google.com
+    - music.163.com
+    - '*.music.163.com'
+    - '*.126.net'
+    - musicapi.taihe.com
+    - music.taihe.com
+    - songsearch.kugou.com
+    - trackercdn.kugou.com
+    - '*.kuwo.cn'
+    - api-jooxtt.sanook.com
+    - api.joox.com
+    - joox.com
+    - y.qq.com
+    - '*.y.qq.com'
+    - streamoc.music.tc.qq.com
+    - mobileoc.music.tc.qq.com
+    - isure.stream.qqmusic.qq.com
+    - dl.stream.qqmusic.qq.com
+    - aqqmusic.tc.qq.com
+    - amobile.music.tc.qq.com
+    - '*.xiami.com'
+    - '*.music.migu.cn'
+    - music.migu.cn
+    - '*.msftconnecttest.com'
+    - '*.msftncsi.com'
+    - localhost.ptlogin2.qq.com
+    - '*.*.*.srv.nintendo.net'
+    - '*.*.stun.playstation.net'
+    - xbox.*.*.microsoft.com
+    - '*.ipv6.microsoft.com'
+    - '*.*.xboxlive.com'
+    - speedtest.cros.wr.pvp.net
+  nameserver:
+    - 'https://223.6.6.6/dns-query'
+    - 'https://rubyfish.cn/dns-query'
+    - 'https://dns.pub/dns-query'
+  fallback:
+    - 'https://dns.rubyfish.cn/dns-query'
+    - 'https://public.dns.iij.jp/dns-query'
+    - 'tls://8.8.4.4'
+  fallback-filter:
+    geoip: true
+    ipcidr:
+      - 240.0.0.0/4
+      - 0.0.0.0/32
+      - 127.0.0.1/32
+    domain:
+      - +.google.com
+      - +.facebook.com
+      - +.twitter.com
+      - +.youtube.com
+      - +.xn--ngstr-lra8j.com
+      - +.google.cn
+      - +.googleapis.cn
+      - +.googleapis.com
+      - +.gvt1.com
+proxies: []
+proxy-groups:
+  - name: Nexitally
+    type: select
+    proxies: []
+  - name: "\U0001F34E Apple"
+    type: select
+    proxies:
+      - DIRECT
+      - Nexitally
+  - name: "\U0001F3AC Emby"
+    type: select
+    proxies:
+      - DIRECT
+      - Nexitally
+  - name: "\U0001F4F2 Telegram"
+    type: select
+    proxies:
+      - DIRECT
+      - Nexitally
+  - name: "\U0001F3AC YouTube"
+    type: select
+    proxies:
+      - DIRECT
+      - Nexitally
+  - name: "\U0001F3AC Bilibili"
+    type: select
+    proxies:
+      - DIRECT
+      - Nexitally
+  - name: "\U0001F3AC myTVSUPER"
+    type: select
+    proxies:
+      - DIRECT
+      - Nexitally
+  - name: "\U0001F4F2 LineTV"
+    type: select
+    proxies:
+      - DIRECT
+      - Nexitally
+  - name: "\U0001F3AC iQiyi"
+    type: select
+    proxies:
+      - DIRECT
+      - Nexitally
+  - name: "\U0001F3B5 Tiktok"
+    type: select
+    proxies:
+      - DIRECT
+      - Nexitally
+  - name: "\U0001F4FA Disney"
+    type: select
+    proxies:
+      - DIRECT
+      - Nexitally
+  - name: "\U0001F4FA Netflix"
+    type: select
+    proxies:
+      - DIRECT
+      - Nexitally
+  - name: "\U0001F310 Google"
+    type: select
+    proxies:
+      - DIRECT
+      - Nexitally
+  - name: "\U0001F5A5 Microsoft"
+    type: select
+    proxies:
+      - DIRECT
+      - Nexitally
+  - name: "\U0001F5A5 Learning"
+    type: select
+    proxies:
+      - DIRECT
+      - Nexitally
+  - name: "\U0001F4DF Twitter"
+    type: select
+    proxies:
+      - DIRECT
+      - Nexitally
+  - name: "\U0001F4FA International-Media"
+    type: select
+    proxies:
+      - DIRECT
+      - Nexitally
+  - name: China-Media
+    type: select
+    proxies:
+      - DIRECT
+      - Nexitally
+  - name: Hijacking
+    type: select
+    proxies:
+      - REJECT
+      - DIRECT
+  - name: China-Websites
+    type: select
+    proxies:
+      - DIRECT
+      - Nexitally
+  - name: Final
+    type: select
+    proxies:
+      - DIRECT
+      - Nexitally
+rules:
+  - 'DOMAIN,content1.steampowered.com,DIRECT'
+  - 'DOMAIN,content2.steampowered.com,DIRECT'
+  - 'DOMAIN,content3.steampowered.com,DIRECT'
+  - 'DOMAIN,content4.steampowered.com,DIRECT'
+  - 'DOMAIN,content5.steampowered.com,DIRECT'
+  - 'DOMAIN,content6.steampowered.com,DIRECT'
+  - 'DOMAIN,content7.steampowered.com,DIRECT'
+  - 'DOMAIN,content8.steampowered.com,DIRECT'
+  - 'DOMAIN,client-download.steampowered.com,DIRECT'
+  - 'DOMAIN,content-origin.steampowered.com,DIRECT'
+  - 'DOMAIN,clientconfig.akamai.steamtransparent.com,DIRECT'
+  - 'DOMAIN,steampipe.akamaized.net,DIRECT'
+  - 'DOMAIN,steam.apac.qtlglb.com.mwcloudcdn.com,DIRECT'
+  - 'DOMAIN,cdn1-sea1.valve.net,DIRECT'
+  - 'DOMAIN,cdn2-sea1.valve.net,DIRECT'
+  - 'DOMAIN,steam.apac.qtlglb.com,DIRECT'
+  - 'DOMAIN,edge.steam-dns.top.comcast.net,DIRECT'
+  - 'DOMAIN,edge.steam-dns-2.top.comcast.net,DIRECT'
+  - 'DOMAIN,steam.naeu.qtlglb.com,DIRECT'
+  - 'DOMAIN,steampipe-kr.akamaized.net,DIRECT'
+  - 'DOMAIN,steam.ix.asn.au,DIRECT'
+  - 'DOMAIN,steam.eca.qtlglb.com,DIRECT'
+  - 'DOMAIN,steam.cdn.on.net,DIRECT'
+  - 'DOMAIN,update5.dota2.wmsj.cn,DIRECT'
+  - 'DOMAIN,update2.dota2.wmsj.cn,DIRECT'
+  - 'DOMAIN,update6.dota2.wmsj.cn,DIRECT'
+  - 'DOMAIN,update3.dota2.wmsj.cn,DIRECT'
+  - 'DOMAIN,update1.dota2.wmsj.cn,DIRECT'
+  - 'DOMAIN,update4.dota2.wmsj.cn,DIRECT'
+  - 'DOMAIN,update5.csgo.wmsj.cn,DIRECT'
+  - 'DOMAIN,update2.csgo.wmsj.cn,DIRECT'
+  - 'DOMAIN,update4.csgo.wmsj.cn,DIRECT'
+  - 'DOMAIN,update3.csgo.wmsj.cn,DIRECT'
+  - 'DOMAIN,update6.csgo.wmsj.cn,DIRECT'
+  - 'DOMAIN,update1.csgo.wmsj.cn,DIRECT'
+  - 'DOMAIN,st.dl.bscstorage.net,DIRECT'
+  - 'DOMAIN,cdn.mileweb.cs.steampowered.com.8686c.com,DIRECT'
+  - 'DOMAIN,steamcdn-a.akamaihd.net,DIRECT'
+  - 'DOMAIN-SUFFIX,content.steampowered.com,DIRECT'
+  - 'DOMAIN-SUFFIX,hsar.steampowered.com.edgesuite.net,DIRECT'
+  - 'DOMAIN-SUFFIX,akamai.steamstatic.com,DIRECT'
+  - 'DOMAIN-SUFFIX,cs.steampowered.com,DIRECT'
+  - 'DOMAIN-SUFFIX,cm.steampowered.com,DIRECT'
+  - 'DOMAIN-SUFFIX,edgecast.steamstatic.com,DIRECT'
+  - 'DOMAIN-SUFFIX,steamcontent.com,DIRECT'
+  - 'DOMAIN-SUFFIX,steam-content-dnld-1.apac-1-cdn.cqloud.com,DIRECT'
+  - 'DOMAIN-SUFFIX,steam-content-dnld-1.eu-c1-cdn.cqloud.com,DIRECT'
+  - 'DOMAIN-SUFFIX,steam-content-dnld-1.qwilted-cds.cqloud.com,DIRECT'
+  - "DOMAIN-SUFFIX,emby.nexitally.com,\U0001F3AC Emby"
+  - 'DOMAIN-SUFFIX,ap.spotify.com,DIRECT'
+  - 'DOMAIN-KEYWORD,epochtimes,REJECT'
+  - 'DOMAIN-SUFFIX,881903.com,REJECT'
+  - 'DOMAIN-SUFFIX,aboluowang.com,REJECT'
+  - 'DOMAIN-SUFFIX,bannedbook.org,REJECT'
+  - 'DOMAIN-SUFFIX,bldaily.com,REJECT'
+  - 'DOMAIN-SUFFIX,china21.org,REJECT'
+  - 'DOMAIN-SUFFIX,chinaaffairs.org,REJECT'
+  - 'DOMAIN-SUFFIX,dajiyuan.com,REJECT'
+  - 'DOMAIN-SUFFIX,dalianmeng.org,REJECT'
+  - 'DOMAIN-SUFFIX,dkn.tv,REJECT'
+  - 'DOMAIN-SUFFIX,dongtaiwang.com,REJECT'
+  - 'DOMAIN-SUFFIX,edoors.com,REJECT'
+  - 'DOMAIN-SUFFIX,epochweekly.com,REJECT'
+  - 'DOMAIN-SUFFIX,falundafa.org,REJECT'
+  - 'DOMAIN-SUFFIX,fgmtv.org,REJECT'
+  - 'DOMAIN-SUFFIX,gardennetworks.com,REJECT'
+  - 'DOMAIN-SUFFIX,gongyiluntan.org,REJECT'
+  - 'DOMAIN-SUFFIX,gpass1.com,REJECT'
+  - 'DOMAIN-SUFFIX,hrichina.org,REJECT'
+  - 'DOMAIN-SUFFIX,huanghuagang.org,REJECT'
+  - 'DOMAIN-SUFFIX,internetfreedom.org,REJECT'
+  - 'DOMAIN-SUFFIX,kanzhongguo.com,REJECT'
+  - 'DOMAIN-SUFFIX,lagranepoca.com,REJECT'
+  - 'DOMAIN-SUFFIX,mh4u.org,REJECT'
+  - 'DOMAIN-SUFFIX,mhradio.org,REJECT'
+  - 'DOMAIN-SUFFIX,minghui.org,REJECT'
+  - 'DOMAIN-SUFFIX,newrealmstudios.ca,REJECT'
+  - 'DOMAIN-SUFFIX,ntdtv.com,REJECT'
+  - 'DOMAIN-SUFFIX,ogate.org,REJECT'
+  - 'DOMAIN-SUFFIX,open.com.hk,REJECT'
+  - 'DOMAIN-SUFFIX,organcare.org.tw,REJECT'
+  - 'DOMAIN-SUFFIX,qxbbs.org,REJECT'
+  - 'DOMAIN-SUFFIX,renminbao.com,REJECT'
+  - 'DOMAIN-SUFFIX,secretchina.com,REJECT'
+  - 'DOMAIN-SUFFIX,shenyun.com,REJECT'
+  - 'DOMAIN-SUFFIX,shenyunperformingarts.org,REJECT'
+  - 'DOMAIN-SUFFIX,shenzhoufilm.com,REJECT'
+  - 'DOMAIN-SUFFIX,soundofhope.org,REJECT'
+  - 'DOMAIN-SUFFIX,theepochtimes.com,REJECT'
+  - 'DOMAIN-SUFFIX,tiandixing.org,REJECT'
+  - 'DOMAIN-SUFFIX,tuidang.org,REJECT'
+  - 'DOMAIN-SUFFIX,velkaepocha.sk,REJECT'
+  - 'DOMAIN-SUFFIX,watchinese.com,REJECT'
+  - 'DOMAIN-SUFFIX,wixsite.com,REJECT'
+  - 'DOMAIN-SUFFIX,wujie.net,REJECT'
+  - 'DOMAIN-SUFFIX,wujieliulan.com,REJECT'
+  - 'DOMAIN-SUFFIX,xinsheng.net,REJECT'
+  - 'DOMAIN-SUFFIX,zhengjian.org,REJECT'
+  - 'DOMAIN-SUFFIX,zhuichaguoji.org,REJECT'
+  - "DOMAIN-SUFFIX,aaplimg.com,\U0001F34E Apple"
+  - "DOMAIN-SUFFIX,Apple.co,\U0001F34E Apple"
+  - "DOMAIN-SUFFIX,Apple.com,\U0001F34E Apple"
+  - "DOMAIN-SUFFIX,appstore.com,\U0001F34E Apple"
+  - "DOMAIN-SUFFIX,cdn-Apple.com,\U0001F34E Apple"
+  - "DOMAIN-SUFFIX,crashlytics.com,\U0001F34E Apple"
+  - "DOMAIN-SUFFIX,icloud.com,\U0001F34E Apple"
+  - "DOMAIN-SUFFIX,icloud-content.com,\U0001F34E Apple"
+  - "DOMAIN-SUFFIX,me.com,\U0001F34E Apple"
+  - "DOMAIN-SUFFIX,mzstatic.com,\U0001F34E Apple"
+  - "DOMAIN,www-cdn.icloud.com.akadns.net,\U0001F34E Apple"
+  - "IP-CIDR,17.0.0.0/8,\U0001F34E Apple"
+  - "DOMAIN-SUFFIX,t.me,\U0001F4F2 Telegram"
+  - "DOMAIN-SUFFIX,tdesktop.com,\U0001F4F2 Telegram"
+  - "DOMAIN-SUFFIX,telegra.ph,\U0001F4F2 Telegram"
+  - "DOMAIN-SUFFIX,telegram.me,\U0001F4F2 Telegram"
+  - "DOMAIN-SUFFIX,telegram.org,\U0001F4F2 Telegram"
+  - "DOMAIN-SUFFIX,telesco.pe,\U0001F4F2 Telegram"
+  - "IP-CIDR,91.108.4.0/22,\U0001F4F2 Telegram"
+  - "IP-CIDR,91.108.8.0/22,\U0001F4F2 Telegram"
+  - "IP-CIDR,91.108.12.0/22,\U0001F4F2 Telegram"
+  - "IP-CIDR,91.108.16.0/22,\U0001F4F2 Telegram"
+  - "IP-CIDR,91.108.20.0/22,\U0001F4F2 Telegram"
+  - "IP-CIDR,91.108.56.0/22,\U0001F4F2 Telegram"
+  - "IP-CIDR,149.154.160.0/20,\U0001F4F2 Telegram"
+  - 'DOMAIN-SUFFIX,flightpacific.net,Final'
+  - 'DOMAIN-SUFFIX,nexitallysecure.com,Final'
+  - 'DOMAIN-SUFFIX,nexitally.com,Final'
+  - 'DOMAIN-SUFFIX,amysecure.com,Final'
+  - 'DOMAIN-SUFFIX,amytele.com,Final'
+  - "DOMAIN-SUFFIX,acg.tv,\U0001F3AC Bilibili"
+  - "DOMAIN-SUFFIX,acgvideo.com,\U0001F3AC Bilibili"
+  - "DOMAIN-SUFFIX,b23.tv,\U0001F3AC Bilibili"
+  - "DOMAIN-SUFFIX,biliapi.com,\U0001F3AC Bilibili"
+  - "DOMAIN-SUFFIX,biliapi.net,\U0001F3AC Bilibili"
+  - "DOMAIN-SUFFIX,bilibili.com,\U0001F3AC Bilibili"
+  - "DOMAIN-SUFFIX,biligame.com,\U0001F3AC Bilibili"
+  - "DOMAIN-SUFFIX,biligame.net,\U0001F3AC Bilibili"
+  - "DOMAIN-SUFFIX,bilivideo.com,\U0001F3AC Bilibili"
+  - "DOMAIN-SUFFIX,hdslb.com,\U0001F3AC Bilibili"
+  - "DOMAIN-SUFFIX,im9.com,\U0001F3AC Bilibili"
+  - "DOMAIN-SUFFIX,smtcdns.net,\U0001F3AC Bilibili"
+  - "DOMAIN-SUFFIX,mytvsuper.com,\U0001F3AC myTVSUPER"
+  - "DOMAIN-SUFFIX,tvb.com,\U0001F3AC myTVSUPER"
+  - "DOMAIN-SUFFIX,d3c7rimkq79yfu.cloudfront.net,\U0001F4F2 LineTV"
+  - "DOMAIN-SUFFIX,linetv.tw,\U0001F4F2 LineTV"
+  - "DOMAIN-SUFFIX,profile.line-scdn.net,\U0001F4F2 LineTV"
+  - "DOMAIN,intel-cache.m.iqiyi.com,\U0001F3AC iQiyi"
+  - "DOMAIN,intel-cache.video.iqiyi.com,\U0001F3AC iQiyi"
+  - "DOMAIN,intl-rcd.iqiyi.com,\U0001F3AC iQiyi"
+  - "DOMAIN,intl-subscription.iqiyi.com,\U0001F3AC iQiyi"
+  - "DOMAIN-SUFFIX,inter.iqiyi.com,\U0001F3AC iQiyi"
+  - "DOMAIN-SUFFIX,inter.ptqy.gitv.tv,\U0001F3AC iQiyi"
+  - "DOMAIN-SUFFIX,intl.iqiyi.com,\U0001F3AC iQiyi"
+  - "DOMAIN-SUFFIX,iq.com,\U0001F3AC iQiyi"
+  - "IP-CIDR,103.44.56.0/22,\U0001F3AC iQiyi"
+  - "IP-CIDR,118.26.120.0/24,\U0001F3AC iQiyi"
+  - "IP-CIDR,118.26.32.0/23,\U0001F3AC iQiyi"
+  - "IP-CIDR,223.119.62.225/28,\U0001F3AC iQiyi"
+  - "IP-CIDR,23.40.241.251/32,\U0001F3AC iQiyi"
+  - "IP-CIDR,23.40.242.10/32,\U0001F3AC iQiyi"
+  - "DOMAIN-SUFFIX,byteoversea.com,\U0001F3B5 Tiktok"
+  - "DOMAIN-SUFFIX,ibytedtos.com,\U0001F3B5 Tiktok"
+  - "DOMAIN-SUFFIX,ipstatp.com,\U0001F3B5 Tiktok"
+  - "DOMAIN-SUFFIX,muscdn.com,\U0001F3B5 Tiktok"
+  - "DOMAIN-SUFFIX,musical.ly,\U0001F3B5 Tiktok"
+  - "DOMAIN-SUFFIX,tiktok.com,\U0001F3B5 Tiktok"
+  - "DOMAIN-SUFFIX,tik-tokapi.com,\U0001F3B5 Tiktok"
+  - "DOMAIN-SUFFIX,tiktokcdn.com,\U0001F3B5 Tiktok"
+  - "DOMAIN-SUFFIX,tiktokv.com,\U0001F3B5 Tiktok"
+  - "DOMAIN-KEYWORD,-tiktokcdn-com,\U0001F3B5 Tiktok"
+  - "DOMAIN-SUFFIX,googlevideo.com,\U0001F3AC YouTube"
+  - "DOMAIN-SUFFIX,youtube.com,\U0001F3AC YouTube"
+  - "DOMAIN-SUFFIX,ytimg.com,\U0001F3AC YouTube"
+  - "DOMAIN,youtubei.googleapis.com,\U0001F3AC YouTube"
+  - "DOMAIN,yt3.ggpht.com,\U0001F3AC YouTube"
+  - "DOMAIN-SUFFIX,20thcenturystudios.com.au,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,20thcenturystudios.com.br,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,20thcenturystudios.jp,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,abc-studios.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,abc.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,abcnews.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,abcnews.edgesuite.net,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,adobedtm.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,adventuresbydisney.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,babble.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,babyzone.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,bam.nr-data.net,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,bamgrid.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,beautyandthebeastmusical.co.uk,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,braze.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,cdn.optimizely.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,conviva.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,d9.flashtalking.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,dilcdn.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney-asia.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney-discount.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney-plus.net,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney-portal.my.onetrust.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney-studio.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney-studio.net,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.asia,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.be,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.bg,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.ca,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.ch,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.co.il,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.co.jp,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.co.kr,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.co.th,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.co.uk,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.co.za,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.com.au,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.com.br,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.com.hk,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.com.tw,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.cz,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.de,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.demdex.net,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.dk,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.es,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.fi,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.fr,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.gr,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.hu,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.id,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.in,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.io,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.it,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.my,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.my.sentry.io,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.nl,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.no,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.ph,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.pl,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.pt,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.ro,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.ru,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.se,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disney.sg,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneyadsales.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneyarena.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneyaulani.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneybaby.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneycareers.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneychannelonstage.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneychannelroadtrip.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneycruisebrasil.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneyenconcert.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneyiejobs.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneyinflight.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneyinternational.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneyinternationalhd.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneyjunior.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneyjuniortreataday.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneylatino.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneymagicmoments.co.il,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneymagicmoments.co.uk,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneymagicmoments.co.za,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneymagicmoments.de,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneymagicmoments.es,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneymagicmoments.fr,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneymagicmoments.gen.tr,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneymagicmoments.gr,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneymagicmoments.it,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneymagicmoments.pl,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneymagicmomentsme.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneyme.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneymeetingsandevents.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneymovieinsiders.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneymusicpromotion.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneynewseries.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneynow.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneypeoplesurveys.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneyplus.bn5x.net,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneyplus.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneyplus.com.ssl.sc.omtrdc.net,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneyredirects.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneysrivieraresort.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneystore.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneystreaming.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneysubscription.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneytickets.co.uk,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneyturkiye.com.tr,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneytvajobs.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,disneyworld-go.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,dmed.technology,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,dssott.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,dtci.co,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,dtci.technology,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,edgedatg.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,espn.co.uk,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,espn.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,espn.hb.omtrdc.net,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,espn.net,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,espncdn.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,espndotcom.tt.omtrdc.net,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,espnqa.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,execute-api.us-east-1.amazonaws.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,go-disneyworldgo.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,go.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,js-agent.newrelic.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,marvel.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,marvel10thanniversary.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,marveldimensionofheroes.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,marvelparty.net,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,marvelpinball.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,marvelsdoubleagent.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,marvelspotlightplays.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,marvelsuperheroseptember.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,marvelsuperwar.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,mickey.tv,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,moviesanywhere.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,natgeomaps.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,nationalgeographic.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,nationalgeographicpartners.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,ngeo.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,nomadlandmovie.ch,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,playmation.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,shopdisney.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,shops-disney.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,sorcerersarena.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,spaindisney.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,star-brasil.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,star-latam.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,starwars.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,starwarsgalacticstarcruiser.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,starwarskids.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,streamingdisney.net,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,themarvelexperiencetour.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,thestationbymaker.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,thisispolaris.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,watchdisneyfe.com,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,watchespn.com,\U0001F4FA Disney"
+  - "PROCESS-NAME,com.disney.datg.videoplatforms.android.abc,\U0001F4FA Disney"
+  - "PROCESS-NAME,com.disney.disneyplus,\U0001F4FA Disney"
+  - "DOMAIN-SUFFIX,netflix.com,\U0001F4FA Netflix"
+  - "DOMAIN-SUFFIX,netflix.net,\U0001F4FA Netflix"
+  - "DOMAIN-SUFFIX,nflxext.com,\U0001F4FA Netflix"
+  - "DOMAIN-SUFFIX,nflximg.com,\U0001F4FA Netflix"
+  - "DOMAIN-SUFFIX,nflximg.net,\U0001F4FA Netflix"
+  - "DOMAIN-SUFFIX,nflxso.net,\U0001F4FA Netflix"
+  - "DOMAIN-SUFFIX,nflxvideo.net,\U0001F4FA Netflix"
+  - "DOMAIN-SUFFIX,netflixdnstest0.com,\U0001F4FA Netflix"
+  - "DOMAIN-SUFFIX,netflixdnstest1.com,\U0001F4FA Netflix"
+  - "DOMAIN-SUFFIX,netflixdnstest2.com,\U0001F4FA Netflix"
+  - "DOMAIN-SUFFIX,netflixdnstest3.com,\U0001F4FA Netflix"
+  - "DOMAIN-SUFFIX,netflixdnstest4.com,\U0001F4FA Netflix"
+  - "DOMAIN-SUFFIX,netflixdnstest5.com,\U0001F4FA Netflix"
+  - "DOMAIN-SUFFIX,netflixdnstest6.com,\U0001F4FA Netflix"
+  - "DOMAIN-SUFFIX,netflixdnstest7.com,\U0001F4FA Netflix"
+  - "DOMAIN-SUFFIX,netflixdnstest8.com,\U0001F4FA Netflix"
+  - "DOMAIN-SUFFIX,netflixdnstest9.com,\U0001F4FA Netflix"
+  - "DOMAIN-KEYWORD,dualstack.apiproxy-device-prod-nlb-,\U0001F4FA Netflix"
+  - "DOMAIN-KEYWORD,dualstack.ichnaea-web-,\U0001F4FA Netflix"
+  - "IP-CIDR,23.246.0.0/18,\U0001F4FA Netflix"
+  - "IP-CIDR,37.77.184.0/21,\U0001F4FA Netflix"
+  - "IP-CIDR,45.57.0.0/17,\U0001F4FA Netflix"
+  - "IP-CIDR,64.120.128.0/17,\U0001F4FA Netflix"
+  - "IP-CIDR,66.197.128.0/17,\U0001F4FA Netflix"
+  - "IP-CIDR,108.175.32.0/20,\U0001F4FA Netflix"
+  - "IP-CIDR,192.173.64.0/18,\U0001F4FA Netflix"
+  - "IP-CIDR,198.38.96.0/19,\U0001F4FA Netflix"
+  - "IP-CIDR,198.45.48.0/20,\U0001F4FA Netflix"
+  - "IP-CIDR,34.210.42.111/32,\U0001F4FA Netflix"
+  - "IP-CIDR,52.89.124.203/32,\U0001F4FA Netflix"
+  - "IP-CIDR,54.148.37.5/32,\U0001F4FA Netflix"
+  - 'DOMAIN,mtalk.google.com,DIRECT'
+  - 'DOMAIN,mobile-gtalk.l.google.com,DIRECT'
+  - 'DOMAIN,alt1-mtalk.google.com,DIRECT'
+  - 'DOMAIN,alt2-mtalk.google.com,DIRECT'
+  - 'DOMAIN,alt3-mtalk.google.com,DIRECT'
+  - 'DOMAIN,alt4-mtalk.google.com,DIRECT'
+  - 'DOMAIN,alt5-mtalk.google.com,DIRECT'
+  - 'DOMAIN,alt6-mtalk.google.com,DIRECT'
+  - 'DOMAIN,alt7-mtalk.google.com,DIRECT'
+  - 'DOMAIN,alt8-mtalk.google.com,DIRECT'
+  - 'DOMAIN,alt9-mtalk.google.com,DIRECT'
+  - 'DOMAIN-SUFFIX,mobile-gtalk.l.google.com,DIRECT'
+  - "DOMAIN-SUFFIX,265.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,2mdn.net,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,abc.xyz,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,adservice.google.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,ampproject.org,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,android.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,androidify.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,app-measurement.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,appspot.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,autodraw.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,beacons.gcp.gvt2.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,beacons.gvt2.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,beacons3.gvt2.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,blogger.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,c.admob.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,c.android.clients.google.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,cache.pack.google.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,capitalg.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,certificate-transparency.org,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,chrome.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,chromeexperiments.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,chromestatus.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,chromium.org,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,clickserve.dartsearch.net,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,corp.google.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,creativelab5.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,crl.pki.goog,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,debug.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,deepmind.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,dialogflow.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,dl.google.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,dl.l.google.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,docs.google.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,doubleclick.net,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,drive.google.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,firebase-settings.crashlytics.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,firebaseio.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,getmdl.io,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,getoutline.org,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,ggpht.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,gmail.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,gmodules.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,godoc.org,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,golang.org,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,google-analytics.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,google.cn,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,googleadservices.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,googleanalytics.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,googleapis.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,googledrive.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,googlesyndication.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,googletagmanager.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,googletagservices.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,googleusercontent.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,gstatic.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,gtm.oasisfeng.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,gv.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,gvt0.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,gvt1.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,gvt3.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,gwtproject.org,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,itasoftware.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,madewithcode.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,material.io,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,mtalk.google.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,ocsp.pki.goog,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,pagead-googlehosted.l.google.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,pki-goog.l.google.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,polymer-project.org,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,recaptcha.net,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,safebrowsing-cache.google.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,settings.crashlytics.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,shattered.io,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,ssl-google-analytics.l.google.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,synergyse.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,telephony.goog,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,tensorflow.org,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,tfhub.dev,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,tiltbrush.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,toolbarqueries.google.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,tools.google.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,tools.l.google.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,waveprotocol.org,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,waymo.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,webmproject.org,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,webrtc.org,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,whatbrowser.org,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,widevine.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,www-googletagmanager.l.google.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,x.company,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,xn--ngstr-lra8j.com,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,youtu.be,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,yt.be,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,ytimg.com,\U0001F310 Google"
+  - "DOMAIN-KEYWORD,blogspot,\U0001F310 Google"
+  - "DOMAIN-KEYWORD,gmail,\U0001F310 Google"
+  - "DOMAIN-KEYWORD,google,\U0001F310 Google"
+  - "DOMAIN-KEYWORD,gstatic,\U0001F310 Google"
+  - "DOMAIN-KEYWORD,www.google,\U0001F310 Google"
+  - "IP-CIDR,173.194.0.0/16,\U0001F310 Google"
+  - "IP-CIDR,74.125.0.0/16,\U0001F310 Google"
+  - "DOMAIN-SUFFIX,1drv.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,aadrm.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,acompli.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,acompli.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,aka.ms,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,akadns.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,aspnetcdn.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,assets-yammer.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,azure.cn,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,azure.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,azure.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,azureedge.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,azurerms.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,bing.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,bing.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,cloudapp.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,cloudappsecurity.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,docs.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,edgesuite.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,fabric.io,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,gfx.ms,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,hotmail.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,live.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,live.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,livefilestore.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,lync.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,mesh.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,microsoft-tst.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,microsoft.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,microsoftonline.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,msappproxy.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,msauth.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,msauthimages.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,msecnd.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,msedge.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,msft.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,msftauth.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,msftauthimages.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,msftconnecttest.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,msftidentity.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,msidentity.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,msn.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,msocdn.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,msocsp.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,mstea.ms,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,o365weve.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,oaspapps.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,office.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,office.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,office365.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,officeppe.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,omniroot.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,onedrive.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,onenote.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,onenote.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,onestore.ms,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,onmicrosoft.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,outlook.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,outlookgroups.ms,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,outlookmobile.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,phonefactor.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,public-trust.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,s-microsoft.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,sfbassets.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,sfx.ms,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,sharepoint.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,sharepointonline.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,skype.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,skypeassets.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,skypeforbusiness.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,spoprod-a.akamaihd.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,staffhub.ms,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,svc.ms,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,sway-cdn.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,sway-extensions.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,sway.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,trafficmanager.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,uservoice.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,virtualearth.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,visualstudio.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,windows-ppe.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,windows.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,windows.net,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,windowsazure.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,windowsupdate.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,wunderlist.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,xbox.cn,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,xbox.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,xboxlive.cn,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,xboxlive.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,yammer.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,yammerusercontent.com,\U0001F5A5 Microsoft"
+  - "DOMAIN-KEYWORD,1drv,\U0001F5A5 Microsoft"
+  - "DOMAIN-KEYWORD,microsoft,\U0001F5A5 Microsoft"
+  - "DOMAIN-KEYWORD,onedrive,\U0001F5A5 Microsoft"
+  - "DOMAIN-KEYWORD,skydrive,\U0001F5A5 Microsoft"
+  - "DOMAIN-SUFFIX,acm.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,acs.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,aip.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,ams.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,annualreviews.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,aps.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,ascelibrary.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,asm.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,asme.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,astm.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,blackwell-synergy.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,bmj.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,cabdirect.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,cambridge.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,cas.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,cell.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,clarivate.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,cnki.net,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,cqvip.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,csiro.au,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,deepdyve.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,ebscohost.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,els-cdn.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,elsevier.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,emerald.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,endnote.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,engineeringvillage.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,icevirtuallibrary.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,ieee.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,imf.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,iop.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,jamanetwork.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,jbc.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,jhu.edu,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,jstor.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,karger.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,libguides.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,madsrevolution.net,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,mdpi.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,mpg.de,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,myilibrary.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,nature.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,ncbi.nlm.nih.gov,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,oecd-ilibrary.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,osapublishing.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,oup.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,ovid.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,oxfordartonline.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,oxfordbibliographies.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,oxfordmusiconline.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,pkulaw.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,pnas.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,proquest.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,readcube.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,researchgate.net,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,rsc.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,sagepub.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,sci-hub.tw,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,sciencedirect.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,sciencemag.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,scitation.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,scopus.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,siam.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,spiedigitallibrary.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,springer.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,springerlink.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,tandfonline.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,un.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,uni-bielefeld.de,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,wanfangdata.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,webofknowledge.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,westlaw.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,westlawchina.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,wiley.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,worldbank.org,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,worldscientific.com,\U0001F5A5 Learning"
+  - "DOMAIN-SUFFIX,pscp.tv,\U0001F4DF Twitter"
+  - "DOMAIN-SUFFIX,periscope.tv,\U0001F4DF Twitter"
+  - "DOMAIN-SUFFIX,t.co,\U0001F4DF Twitter"
+  - "DOMAIN-SUFFIX,twimg.co,\U0001F4DF Twitter"
+  - "DOMAIN-SUFFIX,twimg.com,\U0001F4DF Twitter"
+  - "DOMAIN-SUFFIX,twitpic.com,\U0001F4DF Twitter"
+  - "DOMAIN-SUFFIX,twitter.com,\U0001F4DF Twitter"
+  - "DOMAIN-SUFFIX,twitter.jp,\U0001F4DF Twitter"
+  - "DOMAIN-SUFFIX,vine.co,\U0001F4DF Twitter"
+  - "DOMAIN-SUFFIX,c4assets.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,channel4.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,abema.io,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,ameba.jp,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,hayabusa.io,\U0001F4FA International-Media"
+  - "DOMAIN,abematv.akamaized.net,\U0001F4FA International-Media"
+  - "DOMAIN,ds-linear-abematv.akamaized.net,\U0001F4FA International-Media"
+  - "DOMAIN,ds-vod-abematv.akamaized.net,\U0001F4FA International-Media"
+  - "DOMAIN,linear-abematv.akamaized.net,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,primevideo.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,bahamut.com.tw,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,gamer.com.tw,\U0001F4FA International-Media"
+  - "DOMAIN,gamer-cds.cdn.hinet.net,\U0001F4FA International-Media"
+  - "DOMAIN,gamer2-cds.cdn.hinet.net,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,bbc.co.uk,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,bbci.co.uk,\U0001F4FA International-Media"
+  - "DOMAIN-KEYWORD,bbcfmt,\U0001F4FA International-Media"
+  - "DOMAIN-KEYWORD,uk-live,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,dazn.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,encoretvb.com,\U0001F4FA International-Media"
+  - "DOMAIN,content.jwplatform.com,\U0001F4FA International-Media"
+  - "DOMAIN,videos-f.jwpsrv.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,dashasiafox.akamaized.net,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,fox.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,foxdcg.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,foxplus.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,staticasiafox.akamaized.net,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,theplatform.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,uplynk.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,hbo.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,hbogo.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,hboasia.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,hbogo.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,hbogoasia.hk,\U0001F4FA International-Media"
+  - "DOMAIN,44wilhpljf.execute-api.ap-southeast-1.amazonaws.com,\U0001F4FA International-Media"
+  - "DOMAIN,bcbolthboa-a.akamaihd.net,\U0001F4FA International-Media"
+  - "DOMAIN,cf-images.ap-southeast-1.prod.boltdns.net,\U0001F4FA International-Media"
+  - "DOMAIN,manifest.prod.boltdns.net,\U0001F4FA International-Media"
+  - "DOMAIN,s3-ap-southeast-1.amazonaws.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,hulu.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,huluim.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,hulustream.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,kktv.com.tw,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,kktv.me,\U0001F4FA International-Media"
+  - "DOMAIN,kktv-theater.kk.stream,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,linetv.tw,\U0001F4FA International-Media"
+  - "DOMAIN,d3c7rimkq79yfu.cloudfront.net,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,happyon.jp,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,hulu.jp,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,litv.tv,\U0001F4FA International-Media"
+  - "DOMAIN,litvfreemobile-hichannel.cdn.hinet.net,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,mytvsuper.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,tvb.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,netflix.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,netflix.net,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,nflxext.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,nflximg.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,nflximg.net,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,nflxso.net,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,nflxvideo.net,\U0001F4FA International-Media"
+  - "IP-CIDR,23.246.0.0/18,\U0001F4FA International-Media"
+  - "IP-CIDR,37.77.184.0/21,\U0001F4FA International-Media"
+  - "IP-CIDR,45.57.0.0/17,\U0001F4FA International-Media"
+  - "IP-CIDR,64.120.128.0/17,\U0001F4FA International-Media"
+  - "IP-CIDR,66.197.128.0/17,\U0001F4FA International-Media"
+  - "IP-CIDR,108.175.32.0/20,\U0001F4FA International-Media"
+  - "IP-CIDR,192.173.64.0/18,\U0001F4FA International-Media"
+  - "IP-CIDR,198.38.96.0/19,\U0001F4FA International-Media"
+  - "IP-CIDR,198.45.48.0/20,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,pbs.org,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,phncdn.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,pornhub.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,pornhubpremium.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,twitch.tv,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,twitchcdn.net,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,ttvnw.net,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,viu.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,viu.tv,\U0001F4FA International-Media"
+  - "DOMAIN,api.viu.now.com,\U0001F4FA International-Media"
+  - "DOMAIN,d1k2us671qcoau.cloudfront.net,\U0001F4FA International-Media"
+  - "DOMAIN,d2anahhhmp1ffz.cloudfront.net,\U0001F4FA International-Media"
+  - "DOMAIN,dfp6rglgjqszk.cloudfront.net,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,googlevideo.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,youtube.com,\U0001F4FA International-Media"
+  - "DOMAIN,youtubei.googleapis.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,deezer.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,dzcdn.net,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,kkbox.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,kkbox.com.tw,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,kfs.io,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,joox.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,pandora.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,pscdn.co,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,scdn.co,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,spotify.com,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,spoti.fi,\U0001F4FA International-Media"
+  - "IP-CIDR,35.186.224.47/32,\U0001F4FA International-Media"
+  - "DOMAIN-SUFFIX,tidal.com,\U0001F4FA International-Media"
+  - 'DOMAIN-SUFFIX,iqiyi.com,China-Media'
+  - 'DOMAIN-SUFFIX,71.am,China-Media'
+  - 'DOMAIN-SUFFIX,bilibili.com,China-Media'
+  - 'DOMAIN,upos-hz-mirrorakam.akamaized.net,China-Media'
+  - 'DOMAIN-SUFFIX,17gouwuba.com,Hijacking'
+  - 'DOMAIN-SUFFIX,186078.com,Hijacking'
+  - 'DOMAIN-SUFFIX,189zj.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,285680.com,Hijacking'
+  - 'DOMAIN-SUFFIX,3721zh.com,Hijacking'
+  - 'DOMAIN-SUFFIX,4336wang.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,51chumoping.com,Hijacking'
+  - 'DOMAIN-SUFFIX,51mld.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,58mingri.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,58mingtian.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,6d63d3.com,Hijacking'
+  - 'DOMAIN-SUFFIX,7gg.cc,Hijacking'
+  - 'DOMAIN-SUFFIX,91veg.com,Hijacking'
+  - 'DOMAIN-SUFFIX,9s6q.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,adsame.com,Hijacking'
+  - 'DOMAIN-SUFFIX,aiclk.com,Hijacking'
+  - 'DOMAIN-SUFFIX,akuai.top,Hijacking'
+  - 'DOMAIN-SUFFIX,atplay.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,baiwanchuangyi.com,Hijacking'
+  - 'DOMAIN-SUFFIX,bayimob.com,Hijacking'
+  - 'DOMAIN-SUFFIX,beerto.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,beilamusi.com,Hijacking'
+  - 'DOMAIN-SUFFIX,benshiw.net,Hijacking'
+  - 'DOMAIN-SUFFIX,bianxianmao.com,Hijacking'
+  - 'DOMAIN-SUFFIX,bryonypie.com,Hijacking'
+  - 'DOMAIN-SUFFIX,cishantao.com,Hijacking'
+  - 'DOMAIN-SUFFIX,cszlks.com,Hijacking'
+  - 'DOMAIN-SUFFIX,cudaojia.com,Hijacking'
+  - 'DOMAIN-SUFFIX,dafapromo.com,Hijacking'
+  - 'DOMAIN-SUFFIX,daitdai.com,Hijacking'
+  - 'DOMAIN-SUFFIX,dsaeerf.com,Hijacking'
+  - 'DOMAIN-SUFFIX,dugesheying.com,Hijacking'
+  - 'DOMAIN-SUFFIX,dv8c1t.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,erdoscs.com,Hijacking'
+  - 'DOMAIN-SUFFIX,fan-yong.com,Hijacking'
+  - 'DOMAIN-SUFFIX,feih.com.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,fjlqqc.com,Hijacking'
+  - 'DOMAIN-SUFFIX,fkku194.com,Hijacking'
+  - 'DOMAIN-SUFFIX,freedrive.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,gclick.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,goufanli100.com,Hijacking'
+  - 'DOMAIN-SUFFIX,gouwubang.com,Hijacking'
+  - 'DOMAIN-SUFFIX,haoshengtoys.com,Hijacking'
+  - 'DOMAIN-SUFFIX,ichaosheng.com,Hijacking'
+  - 'DOMAIN-SUFFIX,ishop789.com,Hijacking'
+  - 'DOMAIN-SUFFIX,jdkic.com,Hijacking'
+  - 'DOMAIN-SUFFIX,jiubuhua.com,Hijacking'
+  - 'DOMAIN-SUFFIX,jwg365.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,kawo77.com,Hijacking'
+  - 'DOMAIN-SUFFIX,kualianyingxiao.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,kumihua.com,Hijacking'
+  - 'DOMAIN-SUFFIX,ltheanine.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,maipinshangmao.com,Hijacking'
+  - 'DOMAIN-SUFFIX,minisplat.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,mkitgfs.com,Hijacking'
+  - 'DOMAIN-SUFFIX,mlnbike.com,Hijacking'
+  - 'DOMAIN-SUFFIX,mobjump.com,Hijacking'
+  - 'DOMAIN-SUFFIX,nbkbgd.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,newapi.com,Hijacking'
+  - 'DOMAIN-SUFFIX,pinzhitmall.com,Hijacking'
+  - 'DOMAIN-SUFFIX,poppyta.com,Hijacking'
+  - 'DOMAIN-SUFFIX,qichexin.com,Hijacking'
+  - 'DOMAIN-SUFFIX,qinchugudao.com,Hijacking'
+  - 'DOMAIN-SUFFIX,quanliyouxi.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,qutaobi.com,Hijacking'
+  - 'DOMAIN-SUFFIX,ry51w.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,sg536.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,sifubo.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,sifuce.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,sifuda.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,sifufu.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,sifuge.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,sifugu.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,sifuhe.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,sifuhu.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,sifuji.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,sifuka.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,smgru.net,Hijacking'
+  - 'DOMAIN-SUFFIX,taoggou.com,Hijacking'
+  - 'DOMAIN-SUFFIX,tcxshop.com,Hijacking'
+  - 'DOMAIN-SUFFIX,tjqonline.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,topitme.com,Hijacking'
+  - 'DOMAIN-SUFFIX,tuia.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,tuipenguin.com,Hijacking'
+  - 'DOMAIN-SUFFIX,tuitiger.com,Hijacking'
+  - 'DOMAIN-SUFFIX,wx16999.com,Hijacking'
+  - 'DOMAIN-SUFFIX,xiaohuau.xyz,Hijacking'
+  - 'DOMAIN-SUFFIX,yinmong.com,Hijacking'
+  - 'DOMAIN-SUFFIX,yiqifa.com,Hijacking'
+  - 'DOMAIN-SUFFIX,yitaopt.com,Hijacking'
+  - 'DOMAIN-SUFFIX,yjqiqi.com,Hijacking'
+  - 'DOMAIN-SUFFIX,yukhj.com,Hijacking'
+  - 'DOMAIN-SUFFIX,zhaozecheng.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,zhenxinet.com,Hijacking'
+  - 'DOMAIN-SUFFIX,zunmi.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,zzd6.com,Hijacking'
+  - 'IP-CIDR,39.107.15.115/32,Hijacking'
+  - 'IP-CIDR,47.89.59.182/32,Hijacking'
+  - 'IP-CIDR,103.49.209.27/32,Hijacking'
+  - 'IP-CIDR,123.56.152.96/32,Hijacking'
+  - 'IP-CIDR,61.160.200.223/32,Hijacking'
+  - 'IP-CIDR,61.160.200.242/32,Hijacking'
+  - 'IP-CIDR,61.160.200.252/32,Hijacking'
+  - 'IP-CIDR,61.174.50.214/32,Hijacking'
+  - 'IP-CIDR,111.175.220.163/32,Hijacking'
+  - 'IP-CIDR,111.175.220.164/32,Hijacking'
+  - 'IP-CIDR,124.232.160.178/32,Hijacking'
+  - 'IP-CIDR,175.6.223.15/32,Hijacking'
+  - 'IP-CIDR,183.59.53.237/32,Hijacking'
+  - 'IP-CIDR,218.93.127.37/32,Hijacking'
+  - 'IP-CIDR,221.228.17.152/32,Hijacking'
+  - 'IP-CIDR,221.231.6.79/32,Hijacking'
+  - 'IP-CIDR,222.186.61.91/32,Hijacking'
+  - 'IP-CIDR,222.186.61.95/32,Hijacking'
+  - 'IP-CIDR,222.186.61.96/32,Hijacking'
+  - 'IP-CIDR,222.186.61.97/32,Hijacking'
+  - 'IP-CIDR,106.75.231.48/32,Hijacking'
+  - 'IP-CIDR,119.4.249.166/32,Hijacking'
+  - 'IP-CIDR,220.196.52.141/32,Hijacking'
+  - 'IP-CIDR,221.6.4.148/32,Hijacking'
+  - 'IP-CIDR,114.247.28.96/32,Hijacking'
+  - 'IP-CIDR,221.179.131.72/32,Hijacking'
+  - 'IP-CIDR,221.179.140.145/32,Hijacking'
+  - 'IP-CIDR,10.72.25.0/24,Hijacking'
+  - 'IP-CIDR,115.182.16.79/32,Hijacking'
+  - 'IP-CIDR,118.144.88.126/32,Hijacking'
+  - 'IP-CIDR,118.144.88.215/32,Hijacking'
+  - 'IP-CIDR,118.144.88.216/32,Hijacking'
+  - 'IP-CIDR,120.76.189.132/32,Hijacking'
+  - 'IP-CIDR,124.14.21.147/32,Hijacking'
+  - 'IP-CIDR,124.14.21.151/32,Hijacking'
+  - 'IP-CIDR,180.166.52.24/32,Hijacking'
+  - 'IP-CIDR,211.161.101.106/32,Hijacking'
+  - 'IP-CIDR,220.115.251.25/32,Hijacking'
+  - 'IP-CIDR,222.73.156.235/32,Hijacking'
+  - 'DOMAIN-SUFFIX,kuaizip.com,Hijacking'
+  - 'DOMAIN-SUFFIX,mackeeper.com,Hijacking'
+  - 'DOMAIN-SUFFIX,flash.cn,Hijacking'
+  - 'DOMAIN,geo2.adobe.com,Hijacking'
+  - 'DOMAIN-SUFFIX,4009997658.com,Hijacking'
+  - 'DOMAIN-SUFFIX,abbyychina.com,Hijacking'
+  - 'DOMAIN-SUFFIX,bartender.cc,Hijacking'
+  - 'DOMAIN-SUFFIX,betterzip.net,Hijacking'
+  - 'DOMAIN-SUFFIX,beyondcompare.cc,Hijacking'
+  - 'DOMAIN-SUFFIX,bingdianhuanyuan.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,chemdraw.com.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,cjmakeding.com,Hijacking'
+  - 'DOMAIN-SUFFIX,cjmkt.com,Hijacking'
+  - 'DOMAIN-SUFFIX,codesoftchina.com,Hijacking'
+  - 'DOMAIN-SUFFIX,coreldrawchina.com,Hijacking'
+  - 'DOMAIN-SUFFIX,crossoverchina.com,Hijacking'
+  - 'DOMAIN-SUFFIX,easyrecoverychina.com,Hijacking'
+  - 'DOMAIN-SUFFIX,ediuschina.com,Hijacking'
+  - 'DOMAIN-SUFFIX,flstudiochina.com,Hijacking'
+  - 'DOMAIN-SUFFIX,formysql.com,Hijacking'
+  - 'DOMAIN-SUFFIX,guitarpro.cc,Hijacking'
+  - 'DOMAIN-SUFFIX,huishenghuiying.com.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,hypersnap.net,Hijacking'
+  - 'DOMAIN-SUFFIX,iconworkshop.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,imindmap.cc,Hijacking'
+  - 'DOMAIN-SUFFIX,jihehuaban.com.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,keyshot.cc,Hijacking'
+  - 'DOMAIN-SUFFIX,kingdeecn.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,logoshejishi.com,Hijacking'
+  - 'DOMAIN-SUFFIX,mairuan.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,mairuan.com,Hijacking'
+  - 'DOMAIN-SUFFIX,mairuan.com.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,mairuan.net,Hijacking'
+  - 'DOMAIN-SUFFIX,mairuanwang.com,Hijacking'
+  - 'DOMAIN-SUFFIX,makeding.com,Hijacking'
+  - 'DOMAIN-SUFFIX,mathtype.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,mindmanager.cc,Hijacking'
+  - 'DOMAIN-SUFFIX,mindmapper.cc,Hijacking'
+  - 'DOMAIN-SUFFIX,mycleanmymac.com,Hijacking'
+  - 'DOMAIN-SUFFIX,nicelabel.cc,Hijacking'
+  - 'DOMAIN-SUFFIX,ntfsformac.cc,Hijacking'
+  - 'DOMAIN-SUFFIX,ntfsformac.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,overturechina.com,Hijacking'
+  - 'DOMAIN-SUFFIX,passwordrecovery.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,pdfexpert.cc,Hijacking'
+  - 'DOMAIN-SUFFIX,shankejingling.com,Hijacking'
+  - 'DOMAIN-SUFFIX,ultraiso.net,Hijacking'
+  - 'DOMAIN-SUFFIX,vegaschina.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,xmindchina.net,Hijacking'
+  - 'DOMAIN-SUFFIX,xshellcn.com,Hijacking'
+  - 'DOMAIN-SUFFIX,yihuifu.cn,Hijacking'
+  - 'DOMAIN-SUFFIX,yuanchengxiezuo.com,Hijacking'
+  - 'DOMAIN-SUFFIX,zbrushcn.com,Hijacking'
+  - 'DOMAIN-SUFFIX,zhzzx.com,Hijacking'
+  - 'DOMAIN-SUFFIX,qhres.com,China-Websites'
+  - 'DOMAIN-SUFFIX,qhres.com,China-Websites'
+  - 'DOMAIN-SUFFIX,qhimg.com,China-Websites'
+  - 'DOMAIN-SUFFIX,akadns.net,China-Websites'
+  - 'DOMAIN-SUFFIX,alibaba.com,China-Websites'
+  - 'DOMAIN-SUFFIX,alicdn.com,China-Websites'
+  - 'DOMAIN-SUFFIX,alikunlun.com,China-Websites'
+  - 'DOMAIN-SUFFIX,alipay.com,China-Websites'
+  - 'DOMAIN-SUFFIX,amap.com,China-Websites'
+  - 'DOMAIN-SUFFIX,dingtalk.com,China-Websites'
+  - 'DOMAIN-SUFFIX,taobao.com,China-Websites'
+  - 'DOMAIN-SUFFIX,tmall.com,China-Websites'
+  - 'DOMAIN-SUFFIX,tmall.hk,China-Websites'
+  - 'DOMAIN-SUFFIX,ykimg.com,China-Websites'
+  - 'DOMAIN-SUFFIX,youku.com,China-Websites'
+  - 'DOMAIN-SUFFIX,xiami.com,China-Websites'
+  - 'DOMAIN-SUFFIX,xiami.net,China-Websites'
+  - 'DOMAIN-SUFFIX,baidu.com,China-Websites'
+  - 'DOMAIN-SUFFIX,baidubcr.com,China-Websites'
+  - 'DOMAIN-SUFFIX,bdstatic.com,China-Websites'
+  - 'DOMAIN-SUFFIX,acgvideo.com,China-Websites'
+  - 'DOMAIN-SUFFIX,biliapi.com,China-Websites'
+  - 'DOMAIN-SUFFIX,biliapi.net,China-Websites'
+  - 'DOMAIN-SUFFIX,bilibili.com,China-Websites'
+  - 'DOMAIN-SUFFIX,hdslb.com,China-Websites'
+  - 'DOMAIN-SUFFIX,blizzard.com,China-Websites'
+  - 'DOMAIN-SUFFIX,battle.net,China-Websites'
+  - 'DOMAIN,blzddist1-a.akamaihd.net,China-Websites'
+  - 'DOMAIN-SUFFIX,feiliao.com,China-Websites'
+  - 'DOMAIN-SUFFIX,pstatp.com,China-Websites'
+  - 'DOMAIN-SUFFIX,snssdk.com,China-Websites'
+  - 'DOMAIN-SUFFIX,iesdouyin.com,China-Websites'
+  - 'DOMAIN-SUFFIX,toutiao.com,China-Websites'
+  - 'DOMAIN-SUFFIX,343480.com,China-Websites'
+  - 'DOMAIN-SUFFIX,baduziyuan.com,China-Websites'
+  - 'DOMAIN-SUFFIX,com-hs-hkdy.com,China-Websites'
+  - 'DOMAIN-SUFFIX,czybjz.com,China-Websites'
+  - 'DOMAIN-SUFFIX,dandanzan.com,China-Websites'
+  - 'DOMAIN-SUFFIX,fjhps.com,China-Websites'
+  - 'DOMAIN-SUFFIX,kuyunbo.club,China-Websites'
+  - 'DOMAIN-SUFFIX,21cn.com,China-Websites'
+  - 'DOMAIN-SUFFIX,hitv.com,China-Websites'
+  - 'DOMAIN-SUFFIX,mgtv.com,China-Websites'
+  - 'DOMAIN-SUFFIX,iqiyi.com,China-Websites'
+  - 'DOMAIN-SUFFIX,iqiyipic.com,China-Websites'
+  - 'DOMAIN-SUFFIX,71.am.com,China-Websites'
+  - 'DOMAIN-SUFFIX,jd.com,China-Websites'
+  - 'DOMAIN-SUFFIX,jd.hk,China-Websites'
+  - 'DOMAIN-SUFFIX,360buyimg.com,China-Websites'
+  - 'DOMAIN-SUFFIX,iciba.com,China-Websites'
+  - 'DOMAIN-SUFFIX,ksosoft.com,China-Websites'
+  - 'DOMAIN-SUFFIX,meitu.com,China-Websites'
+  - 'DOMAIN-SUFFIX,meitudata.com,China-Websites'
+  - 'DOMAIN-SUFFIX,meitustat.com,China-Websites'
+  - 'DOMAIN-SUFFIX,meipai.com,China-Websites'
+  - 'DOMAIN-SUFFIX,duokan.com,China-Websites'
+  - 'DOMAIN-SUFFIX,mi-img.com,China-Websites'
+  - 'DOMAIN-SUFFIX,miui.com,China-Websites'
+  - 'DOMAIN-SUFFIX,xiaomi.com,China-Websites'
+  - 'DOMAIN-SUFFIX,microsoft.com,China-Websites'
+  - 'DOMAIN-SUFFIX,windows.com,China-Websites'
+  - 'DOMAIN-SUFFIX,windowsupdate.com,China-Websites'
+  - 'DOMAIN-SUFFIX,visualstudio.com,China-Websites'
+  - 'DOMAIN-SUFFIX,msecnd.net,China-Websites'
+  - 'DOMAIN,officecdn-microsoft-com.akamaized.net,China-Websites'
+  - 'DOMAIN-SUFFIX,163.com,China-Websites'
+  - 'DOMAIN-SUFFIX,126.net,China-Websites'
+  - 'DOMAIN-SUFFIX,127.net,China-Websites'
+  - 'DOMAIN-SUFFIX,163yun.com,China-Websites'
+  - 'DOMAIN-SUFFIX,lofter.com,China-Websites'
+  - 'DOMAIN-SUFFIX,ydstatic.com,China-Websites'
+  - 'DOMAIN-SUFFIX,sina.com,China-Websites'
+  - 'DOMAIN-SUFFIX,weibo.com,China-Websites'
+  - 'DOMAIN-SUFFIX,sohu.com,China-Websites'
+  - 'DOMAIN-SUFFIX,sohucs.com,China-Websites'
+  - 'DOMAIN-SUFFIX,sohu-inc.com,China-Websites'
+  - 'DOMAIN-SUFFIX,v-56.com,China-Websites'
+  - 'DOMAIN-SUFFIX,sogo.com,China-Websites'
+  - 'DOMAIN-SUFFIX,sogou.com,China-Websites'
+  - 'DOMAIN-SUFFIX,sogoucdn.com,China-Websites'
+  - 'DOMAIN-SUFFIX,qq.com,China-Websites'
+  - 'DOMAIN-SUFFIX,tencent.com,China-Websites'
+  - 'DOMAIN-SUFFIX,jstucdn.com,China-Websites'
+  - 'DOMAIN-SUFFIX,zimuzu.io,China-Websites'
+  - 'DOMAIN-SUFFIX,zimuzu.tv,China-Websites'
+  - 'DOMAIN-SUFFIX,zmz2019.com,China-Websites'
+  - 'DOMAIN-SUFFIX,zmzapi.com,China-Websites'
+  - 'DOMAIN-SUFFIX,zmzapi.net,China-Websites'
+  - 'DOMAIN-SUFFIX,zmzfile.com,China-Websites'
+  - 'DOMAIN-SUFFIX,chinanetcenter.com,China-Websites'
+  - 'DOMAIN-SUFFIX,wangsu.com,China-Websites'
+  - 'DOMAIN-SUFFIX,meixincdn.com,China-Websites'
+  - 'DOMAIN-SUFFIX,ipip.net,China-Websites'
+  - 'DOMAIN-SUFFIX,ip.la,China-Websites'
+  - 'DOMAIN-SUFFIX,ip-cdn.com,China-Websites'
+  - 'DOMAIN-SUFFIX,ipv6-test.com,China-Websites'
+  - 'DOMAIN-SUFFIX,test-ipv6.com,China-Websites'
+  - 'DOMAIN-SUFFIX,whatismyip.com,China-Websites'
+  - 'DOMAIN,ip.bjango.com,China-Websites'
+  - 'DOMAIN-SUFFIX,netspeedtestmaster.com,China-Websites'
+  - 'DOMAIN,speedtest.macpaw.com,China-Websites'
+  - 'DOMAIN-SUFFIX,awesome-hd.me,China-Websites'
+  - 'DOMAIN-SUFFIX,broadcasthe.net,China-Websites'
+  - 'DOMAIN-SUFFIX,chdbits.co,China-Websites'
+  - 'DOMAIN-SUFFIX,classix-unlimited.co.uk,China-Websites'
+  - 'DOMAIN-SUFFIX,empornium.me,China-Websites'
+  - 'DOMAIN-SUFFIX,gazellegames.net,China-Websites'
+  - 'DOMAIN-SUFFIX,hdchina.org,China-Websites'
+  - 'DOMAIN-SUFFIX,hdsky.me,China-Websites'
+  - 'DOMAIN-SUFFIX,jpopsuki.eu,China-Websites'
+  - 'DOMAIN-SUFFIX,keepfrds.com,China-Websites'
+  - 'DOMAIN-SUFFIX,m-team.cc,China-Websites'
+  - 'DOMAIN-SUFFIX,nanyangpt.com,China-Websites'
+  - 'DOMAIN-SUFFIX,ncore.cc,China-Websites'
+  - 'DOMAIN-SUFFIX,open.cd,China-Websites'
+  - 'DOMAIN-SUFFIX,ourbits.club,China-Websites'
+  - 'DOMAIN-SUFFIX,passthepopcorn.me,China-Websites'
+  - 'DOMAIN-SUFFIX,privatehd.to,China-Websites'
+  - 'DOMAIN-SUFFIX,redacted.ch,China-Websites'
+  - 'DOMAIN-SUFFIX,springsunday.net,China-Websites'
+  - 'DOMAIN-SUFFIX,tjupt.org,China-Websites'
+  - 'DOMAIN-SUFFIX,totheglory.im,China-Websites'
+  - 'DOMAIN-SUFFIX,cn,China-Websites'
+  - 'DOMAIN-SUFFIX,8686c.com,China-Websites'
+  - 'DOMAIN-SUFFIX,aixifan.com,China-Websites'
+  - 'DOMAIN-SUFFIX,beitaichufang.com,China-Websites'
+  - 'DOMAIN-SUFFIX,booking.com,China-Websites'
+  - 'DOMAIN-SUFFIX,bstatic.com,China-Websites'
+  - 'DOMAIN-SUFFIX,cailianpress.com,China-Websites'
+  - 'DOMAIN-SUFFIX,chunyu.mobi,China-Websites'
+  - 'DOMAIN-SUFFIX,chushou.tv,China-Websites'
+  - 'DOMAIN-SUFFIX,cmbchina.com,China-Websites'
+  - 'DOMAIN-SUFFIX,cmbimg.com,China-Websites'
+  - 'DOMAIN-SUFFIX,ctrip.com,China-Websites'
+  - 'DOMAIN-SUFFIX,dfcfw.com,China-Websites'
+  - 'DOMAIN-SUFFIX,douban.com,China-Websites'
+  - 'DOMAIN-SUFFIX,doubanio.com,China-Websites'
+  - 'DOMAIN-SUFFIX,douyu.com,China-Websites'
+  - 'DOMAIN-SUFFIX,dxycdn.com,China-Websites'
+  - 'DOMAIN-SUFFIX,eastmoney.com,China-Websites'
+  - 'DOMAIN-SUFFIX,futunn.com,China-Websites'
+  - 'DOMAIN-SUFFIX,geilicdn.com,China-Websites'
+  - 'DOMAIN-SUFFIX,hicloud.com,China-Websites'
+  - 'DOMAIN-SUFFIX,hostbuf.com,China-Websites'
+  - 'DOMAIN-SUFFIX,huya.com,China-Websites'
+  - 'DOMAIN-SUFFIX,infinitynewtab.com,China-Websites'
+  - 'DOMAIN-SUFFIX,ithome.com,China-Websites'
+  - 'DOMAIN-SUFFIX,keepcdn.com,China-Websites'
+  - 'DOMAIN-SUFFIX,kkmh.com,China-Websites'
+  - 'DOMAIN-SUFFIX,luojilab.com,China-Websites'
+  - 'DOMAIN-SUFFIX,maoyun.tv,China-Websites'
+  - 'DOMAIN-SUFFIX,meituan.net,China-Websites'
+  - 'DOMAIN-SUFFIX,mobike.com,China-Websites'
+  - 'DOMAIN-SUFFIX,mubu.com,China-Websites'
+  - 'DOMAIN-SUFFIX,myzaker.com,China-Websites'
+  - 'DOMAIN-SUFFIX,nvidia.com,China-Websites'
+  - 'DOMAIN-SUFFIX,paypal.com,China-Websites'
+  - 'DOMAIN-SUFFIX,paypalobjects.com,China-Websites'
+  - 'DOMAIN-SUFFIX,qyer.com,China-Websites'
+  - 'DOMAIN-SUFFIX,qyerstatic.com,China-Websites'
+  - 'DOMAIN-SUFFIX,ronghub.com,China-Websites'
+  - 'DOMAIN-SUFFIX,ruguoapp.com,China-Websites'
+  - 'DOMAIN-SUFFIX,smzdm.com,China-Websites'
+  - 'DOMAIN-SUFFIX,snapdrop.net,China-Websites'
+  - 'DOMAIN-SUFFIX,sspai.com,China-Websites'
+  - 'DOMAIN-SUFFIX,teamviewer.com,China-Websites'
+  - 'DOMAIN-SUFFIX,tianyancha.com,China-Websites'
+  - 'DOMAIN-SUFFIX,udacity.com,China-Websites'
+  - 'DOMAIN-SUFFIX,uning.com,China-Websites'
+  - 'DOMAIN-SUFFIX,weather.com,China-Websites'
+  - 'DOMAIN-SUFFIX,weidian.com,China-Websites'
+  - 'DOMAIN-SUFFIX,xmcdn.com,China-Websites'
+  - 'DOMAIN-SUFFIX,yangkeduo.com,China-Websites'
+  - 'DOMAIN-SUFFIX,zhangzishi.cc,China-Websites'
+  - 'DOMAIN-SUFFIX,zhihu.com,China-Websites'
+  - 'DOMAIN-SUFFIX,zhimg.com,China-Websites'
+  - 'DOMAIN-SUFFIX,zhuihd.com,China-Websites'
+  - 'DOMAIN,download.jetbrains.com,China-Websites'
+  - 'DOMAIN-SUFFIX,local,China-Websites'
+  - 'DOMAIN,mtalk.google.com,China-Websites'
+  - 'IP-CIDR,192.168.0.0/16,China-Websites'
+  - 'IP-CIDR,10.0.0.0/8,China-Websites'
+  - 'IP-CIDR,172.16.0.0/12,China-Websites'
+  - 'IP-CIDR,127.0.0.0/8,China-Websites'
+  - 'IP-CIDR,100.64.0.0/10,China-Websites'
+  - 'DOMAIN-SUFFIX,appspot.com,Final'
+  - 'DOMAIN-SUFFIX,blogger.com,Final'
+  - 'DOMAIN-SUFFIX,getoutline.org,Final'
+  - 'DOMAIN-SUFFIX,gvt0.com,Final'
+  - 'DOMAIN-SUFFIX,gvt1.com,Final'
+  - 'DOMAIN-SUFFIX,gvt3.com,Final'
+  - 'DOMAIN-SUFFIX,xn--ngstr-lra8j.com,Final'
+  - 'DOMAIN-KEYWORD,google,Final'
+  - 'DOMAIN-KEYWORD,blogspot,Final'
+  - 'DOMAIN-SUFFIX,onedrive.live.com,Final'
+  - 'DOMAIN-SUFFIX,xboxlive.com,Final'
+  - 'DOMAIN-SUFFIX,cdninstagram.com,Final'
+  - 'DOMAIN-SUFFIX,fb.com,Final'
+  - 'DOMAIN-SUFFIX,fb.me,Final'
+  - 'DOMAIN-SUFFIX,fbaddins.com,Final'
+  - 'DOMAIN-SUFFIX,fbcdn.net,Final'
+  - 'DOMAIN-SUFFIX,fbsbx.com,Final'
+  - 'DOMAIN-SUFFIX,fbworkmail.com,Final'
+  - 'DOMAIN-SUFFIX,instagram.com,Final'
+  - 'DOMAIN-SUFFIX,m.me,Final'
+  - 'DOMAIN-SUFFIX,messenger.com,Final'
+  - 'DOMAIN-SUFFIX,oculus.com,Final'
+  - 'DOMAIN-SUFFIX,oculuscdn.com,Final'
+  - 'DOMAIN-SUFFIX,rocksdb.org,Final'
+  - 'DOMAIN-SUFFIX,whatsapp.com,Final'
+  - 'DOMAIN-SUFFIX,whatsapp.net,Final'
+  - 'DOMAIN-KEYWORD,facebook,Final'
+  - 'DOMAIN-SUFFIX,pscp.tv,Final'
+  - 'DOMAIN-SUFFIX,periscope.tv,Final'
+  - 'DOMAIN-SUFFIX,t.co,Final'
+  - 'DOMAIN-SUFFIX,twimg.co,Final'
+  - 'DOMAIN-SUFFIX,twimg.com,Final'
+  - 'DOMAIN-SUFFIX,twitpic.com,Final'
+  - 'DOMAIN-SUFFIX,vine.co,Final'
+  - 'DOMAIN-KEYWORD,twitter,Final'
+  - 'DOMAIN-SUFFIX,t.me,Final'
+  - 'DOMAIN-SUFFIX,tdesktop.com,Final'
+  - 'DOMAIN-SUFFIX,telegra.ph,Final'
+  - 'DOMAIN-SUFFIX,telegram.me,Final'
+  - 'DOMAIN-SUFFIX,telegram.org,Final'
+  - 'IP-CIDR,67.198.55.0/24,Final'
+  - 'IP-CIDR,91.108.4.0/22,Final'
+  - 'IP-CIDR,91.108.8.0/22,Final'
+  - 'IP-CIDR,91.108.12.0/22,Final'
+  - 'IP-CIDR,91.108.16.0/22,Final'
+  - 'IP-CIDR,91.108.56.0/22,Final'
+  - 'IP-CIDR,109.239.140.0/24,Final'
+  - 'IP-CIDR,149.154.160.0/20,Final'
+  - 'IP-CIDR,205.172.60.0/22,Final'
+  - 'DOMAIN-SUFFIX,line.me,Final'
+  - 'DOMAIN-SUFFIX,line-apps.com,Final'
+  - 'DOMAIN-SUFFIX,line-scdn.net,Final'
+  - 'DOMAIN-SUFFIX,naver.jp,Final'
+  - 'IP-CIDR,103.2.30.0/23,Final'
+  - 'IP-CIDR,125.209.208.0/20,Final'
+  - 'IP-CIDR,147.92.128.0/17,Final'
+  - 'IP-CIDR,203.104.144.0/21,Final'
+  - 'DOMAIN-SUFFIX,4shared.com,Final'
+  - 'DOMAIN-SUFFIX,520cc.cc,Final'
+  - 'DOMAIN-SUFFIX,881903.com,Final'
+  - 'DOMAIN-SUFFIX,9cache.com,Final'
+  - 'DOMAIN-SUFFIX,9gag.com,Final'
+  - 'DOMAIN-SUFFIX,abc.com,Final'
+  - 'DOMAIN-SUFFIX,abc.net.au,Final'
+  - 'DOMAIN-SUFFIX,abebooks.com,Final'
+  - 'DOMAIN-SUFFIX,amazon.co.jp,Final'
+  - 'DOMAIN-SUFFIX,apigee.com,Final'
+  - 'DOMAIN-SUFFIX,apk-dl.com,Final'
+  - 'DOMAIN-SUFFIX,apkfind.com,Final'
+  - 'DOMAIN-SUFFIX,apkmirror.com,Final'
+  - 'DOMAIN-SUFFIX,apkmonk.com,Final'
+  - 'DOMAIN-SUFFIX,apkpure.com,Final'
+  - 'DOMAIN-SUFFIX,aptoide.com,Final'
+  - 'DOMAIN-SUFFIX,archive.is,Final'
+  - 'DOMAIN-SUFFIX,archive.org,Final'
+  - 'DOMAIN-SUFFIX,arte.tv,Final'
+  - 'DOMAIN-SUFFIX,artstation.com,Final'
+  - 'DOMAIN-SUFFIX,arukas.io,Final'
+  - 'DOMAIN-SUFFIX,ask.com,Final'
+  - 'DOMAIN-SUFFIX,avgle.com,Final'
+  - 'DOMAIN-SUFFIX,badoo.com,Final'
+  - 'DOMAIN-SUFFIX,bandwagonhost.com,Final'
+  - 'DOMAIN-SUFFIX,bbc.com,Final'
+  - 'DOMAIN-SUFFIX,behance.net,Final'
+  - 'DOMAIN-SUFFIX,bibox.com,Final'
+  - 'DOMAIN-SUFFIX,biggo.com.tw,Final'
+  - 'DOMAIN-SUFFIX,binance.com,Final'
+  - 'DOMAIN-SUFFIX,bitcointalk.org,Final'
+  - 'DOMAIN-SUFFIX,bitfinex.com,Final'
+  - 'DOMAIN-SUFFIX,bitmex.com,Final'
+  - 'DOMAIN-SUFFIX,bit-z.com,Final'
+  - 'DOMAIN-SUFFIX,bloglovin.com,Final'
+  - 'DOMAIN-SUFFIX,bloomberg.cn,Final'
+  - 'DOMAIN-SUFFIX,bloomberg.com,Final'
+  - 'DOMAIN-SUFFIX,blubrry.com,Final'
+  - 'DOMAIN-SUFFIX,book.com.tw,Final'
+  - 'DOMAIN-SUFFIX,booklive.jp,Final'
+  - 'DOMAIN-SUFFIX,books.com.tw,Final'
+  - 'DOMAIN-SUFFIX,box.com,Final'
+  - 'DOMAIN-SUFFIX,businessinsider.com,Final'
+  - 'DOMAIN-SUFFIX,bwh1.net,Final'
+  - 'DOMAIN-SUFFIX,castbox.fm,Final'
+  - 'DOMAIN-SUFFIX,cbc.ca,Final'
+  - 'DOMAIN-SUFFIX,cccat.cc,Final'
+  - 'DOMAIN-SUFFIX,cdw.com,Final'
+  - 'DOMAIN-SUFFIX,change.org,Final'
+  - 'DOMAIN-SUFFIX,ck101.com,Final'
+  - 'DOMAIN-SUFFIX,clarionproject.org,Final'
+  - 'DOMAIN-SUFFIX,clyp.it,Final'
+  - 'DOMAIN-SUFFIX,cna.com.tw,Final'
+  - 'DOMAIN-SUFFIX,comparitech.com,Final'
+  - 'DOMAIN-SUFFIX,conoha.jp,Final'
+  - 'DOMAIN-SUFFIX,crucial.com,Final'
+  - 'DOMAIN-SUFFIX,cts.com.tw,Final'
+  - 'DOMAIN-SUFFIX,cw.com.tw,Final'
+  - 'DOMAIN-SUFFIX,cyberctm.com,Final'
+  - 'DOMAIN-SUFFIX,dailymotion.com,Final'
+  - 'DOMAIN-SUFFIX,dailyview.tw,Final'
+  - 'DOMAIN-SUFFIX,daum.net,Final'
+  - 'DOMAIN-SUFFIX,daumcdn.net,Final'
+  - 'DOMAIN-SUFFIX,dcard.tw,Final'
+  - 'DOMAIN-SUFFIX,deepdiscount.com,Final'
+  - 'DOMAIN-SUFFIX,depositphotos.com,Final'
+  - 'DOMAIN-SUFFIX,deviantart.com,Final'
+  - 'DOMAIN-SUFFIX,disconnect.me,Final'
+  - 'DOMAIN-SUFFIX,discordapp.com,Final'
+  - 'DOMAIN-SUFFIX,discordapp.net,Final'
+  - 'DOMAIN-SUFFIX,disqus.com,Final'
+  - 'DOMAIN-SUFFIX,dns2go.com,Final'
+  - 'DOMAIN-SUFFIX,dowjones.com,Final'
+  - 'DOMAIN-SUFFIX,dropbox.com,Final'
+  - 'DOMAIN-SUFFIX,dropboxusercontent.com,Final'
+  - 'DOMAIN-SUFFIX,duckduckgo.com,Final'
+  - 'DOMAIN-SUFFIX,dw.com,Final'
+  - 'DOMAIN-SUFFIX,dynu.com,Final'
+  - 'DOMAIN-SUFFIX,earthcam.com,Final'
+  - 'DOMAIN-SUFFIX,ebookservice.tw,Final'
+  - 'DOMAIN-SUFFIX,economist.com,Final'
+  - 'DOMAIN-SUFFIX,edgecastcdn.net,Final'
+  - 'DOMAIN-SUFFIX,edu,Final'
+  - 'DOMAIN-SUFFIX,elpais.com,Final'
+  - 'DOMAIN-SUFFIX,enanyang.my,Final'
+  - 'DOMAIN-SUFFIX,esoir.be,Final'
+  - 'DOMAIN-SUFFIX,euronews.com,Final'
+  - 'DOMAIN-SUFFIX,feedly.com,Final'
+  - 'DOMAIN-SUFFIX,firech.at,Final'
+  - 'DOMAIN-SUFFIX,flickr.com,Final'
+  - 'DOMAIN-SUFFIX,flitto.com,Final'
+  - 'DOMAIN-SUFFIX,foreignpolicy.com,Final'
+  - 'DOMAIN-SUFFIX,friday.tw,Final'
+  - 'DOMAIN-SUFFIX,ftchinese.com,Final'
+  - 'DOMAIN-SUFFIX,gate.io,Final'
+  - 'DOMAIN-SUFFIX,getlantern.org,Final'
+  - 'DOMAIN-SUFFIX,getsync.com,Final'
+  - 'DOMAIN-SUFFIX,globalvoices.org,Final'
+  - 'DOMAIN-SUFFIX,goo.ne.jp,Final'
+  - 'DOMAIN-SUFFIX,goodreads.com,Final'
+  - 'DOMAIN-SUFFIX,gov,Final'
+  - 'DOMAIN-SUFFIX,gov.tw,Final'
+  - 'DOMAIN-SUFFIX,gumroad.com,Final'
+  - 'DOMAIN-SUFFIX,hbg.com,Final'
+  - 'DOMAIN-SUFFIX,heroku.com,Final'
+  - 'DOMAIN-SUFFIX,hightail.com,Final'
+  - 'DOMAIN-SUFFIX,hk01.com,Final'
+  - 'DOMAIN-SUFFIX,hkbf.org,Final'
+  - 'DOMAIN-SUFFIX,hkbookcity.com,Final'
+  - 'DOMAIN-SUFFIX,hkej.com,Final'
+  - 'DOMAIN-SUFFIX,hket.com,Final'
+  - 'DOMAIN-SUFFIX,hkgolden.com,Final'
+  - 'DOMAIN-SUFFIX,hootsuite.com,Final'
+  - 'DOMAIN-SUFFIX,hudson.org,Final'
+  - 'DOMAIN-SUFFIX,hyread.com.tw,Final'
+  - 'DOMAIN-SUFFIX,ibtimes.com,Final'
+  - 'DOMAIN-SUFFIX,i-cable.com,Final'
+  - 'DOMAIN-SUFFIX,icij.org,Final'
+  - 'DOMAIN-SUFFIX,icoco.com,Final'
+  - 'DOMAIN-SUFFIX,imgur.com,Final'
+  - 'DOMAIN-SUFFIX,initiummall.com,Final'
+  - 'DOMAIN-SUFFIX,insecam.org,Final'
+  - 'DOMAIN-SUFFIX,ipfs.io,Final'
+  - 'DOMAIN-SUFFIX,issuu.com,Final'
+  - 'DOMAIN-SUFFIX,istockphoto.com,Final'
+  - 'DOMAIN-SUFFIX,japantimes.co.jp,Final'
+  - 'DOMAIN-SUFFIX,jiji.com,Final'
+  - 'DOMAIN-SUFFIX,jinx.com,Final'
+  - 'DOMAIN-SUFFIX,jkforum.net,Final'
+  - 'DOMAIN-SUFFIX,joinmastodon.org,Final'
+  - 'DOMAIN-SUFFIX,justpaste.it,Final'
+  - 'DOMAIN-SUFFIX,kakao.com,Final'
+  - 'DOMAIN-SUFFIX,kakaocorp.com,Final'
+  - 'DOMAIN-SUFFIX,kik.com,Final'
+  - 'DOMAIN-SUFFIX,kobo.com,Final'
+  - 'DOMAIN-SUFFIX,kobobooks.com,Final'
+  - 'DOMAIN-SUFFIX,kodingen.com,Final'
+  - 'DOMAIN-SUFFIX,lemonde.fr,Final'
+  - 'DOMAIN-SUFFIX,lepoint.fr,Final'
+  - 'DOMAIN-SUFFIX,lihkg.com,Final'
+  - 'DOMAIN-SUFFIX,listennotes.com,Final'
+  - 'DOMAIN-SUFFIX,livestream.com,Final'
+  - 'DOMAIN-SUFFIX,logmein.com,Final'
+  - 'DOMAIN-SUFFIX,mail.ru,Final'
+  - 'DOMAIN-SUFFIX,mailchimp.com,Final'
+  - 'DOMAIN-SUFFIX,marc.info,Final'
+  - 'DOMAIN-SUFFIX,matters.news,Final'
+  - 'DOMAIN-SUFFIX,medium.com,Final'
+  - 'DOMAIN-SUFFIX,mega.nz,Final'
+  - 'DOMAIN-SUFFIX,mil,Final'
+  - 'DOMAIN-SUFFIX,mingpao.com,Final'
+  - 'DOMAIN-SUFFIX,mobile01.com,Final'
+  - 'DOMAIN-SUFFIX,myspace.com,Final'
+  - 'DOMAIN-SUFFIX,myspacecdn.com,Final'
+  - 'DOMAIN-SUFFIX,nanyang.com,Final'
+  - 'DOMAIN-SUFFIX,naver.com,Final'
+  - 'DOMAIN-SUFFIX,newstapa.org,Final'
+  - 'DOMAIN-SUFFIX,nhk.or.jp,Final'
+  - 'DOMAIN-SUFFIX,nicovideo.jp,Final'
+  - 'DOMAIN-SUFFIX,nii.ac.jp,Final'
+  - 'DOMAIN-SUFFIX,nikkei.com,Final'
+  - 'DOMAIN-SUFFIX,nofile.io,Final'
+  - 'DOMAIN-SUFFIX,now.com,Final'
+  - 'DOMAIN-SUFFIX,nrk.no,Final'
+  - 'DOMAIN-SUFFIX,nyt.com,Final'
+  - 'DOMAIN-SUFFIX,nytchina.com,Final'
+  - 'DOMAIN-SUFFIX,nytcn.me,Final'
+  - 'DOMAIN-SUFFIX,nytco.com,Final'
+  - 'DOMAIN-SUFFIX,nytimes.com,Final'
+  - 'DOMAIN-SUFFIX,nytimg.com,Final'
+  - 'DOMAIN-SUFFIX,nytlog.com,Final'
+  - 'DOMAIN-SUFFIX,nytstyle.com,Final'
+  - 'DOMAIN-SUFFIX,ok.ru,Final'
+  - 'DOMAIN-SUFFIX,okex.com,Final'
+  - 'DOMAIN-SUFFIX,on.cc,Final'
+  - 'DOMAIN-SUFFIX,orientaldaily.com.my,Final'
+  - 'DOMAIN-SUFFIX,overcast.fm,Final'
+  - 'DOMAIN-SUFFIX,paltalk.com,Final'
+  - 'DOMAIN-SUFFIX,pbxes.com,Final'
+  - 'DOMAIN-SUFFIX,pcdvd.com.tw,Final'
+  - 'DOMAIN-SUFFIX,pchome.com.tw,Final'
+  - 'DOMAIN-SUFFIX,pcloud.com,Final'
+  - 'DOMAIN-SUFFIX,picacomic.com,Final'
+  - 'DOMAIN-SUFFIX,pinimg.com,Final'
+  - 'DOMAIN-SUFFIX,pixiv.net,Final'
+  - 'DOMAIN-SUFFIX,player.fm,Final'
+  - 'DOMAIN-SUFFIX,plurk.com,Final'
+  - 'DOMAIN-SUFFIX,po18.tw,Final'
+  - 'DOMAIN-SUFFIX,prism-break.org,Final'
+  - 'DOMAIN-SUFFIX,proxifier.com,Final'
+  - 'DOMAIN-SUFFIX,pts.org.tw,Final'
+  - 'DOMAIN-SUFFIX,pubu.com.tw,Final'
+  - 'DOMAIN-SUFFIX,pubu.tw,Final'
+  - 'DOMAIN-SUFFIX,pureapk.com,Final'
+  - 'DOMAIN-SUFFIX,quora.com,Final'
+  - 'DOMAIN-SUFFIX,quoracdn.net,Final'
+  - 'DOMAIN-SUFFIX,rakuten.co.jp,Final'
+  - 'DOMAIN-SUFFIX,readingtimes.com.tw,Final'
+  - 'DOMAIN-SUFFIX,readmoo.com,Final'
+  - 'DOMAIN-SUFFIX,reddit.com,Final'
+  - 'DOMAIN-SUFFIX,redditmedia.com,Final'
+  - 'DOMAIN-SUFFIX,resilio.com,Final'
+  - 'DOMAIN-SUFFIX,reuters.com,Final'
+  - 'DOMAIN-SUFFIX,rfi.fr,Final'
+  - 'DOMAIN-SUFFIX,roadshow.hk,Final'
+  - 'DOMAIN-SUFFIX,scmp.com,Final'
+  - 'DOMAIN-SUFFIX,scribd.com,Final'
+  - 'DOMAIN-SUFFIX,seatguru.com,Final'
+  - 'DOMAIN-SUFFIX,shadowsocks.org,Final'
+  - 'DOMAIN-SUFFIX,shopee.tw,Final'
+  - 'DOMAIN-SUFFIX,slideshare.net,Final'
+  - 'DOMAIN-SUFFIX,softfamous.com,Final'
+  - 'DOMAIN-SUFFIX,soundcloud.com,Final'
+  - 'DOMAIN-SUFFIX,startpage.com,Final'
+  - 'DOMAIN-SUFFIX,steamcommunity.com,Final'
+  - 'DOMAIN-SUFFIX,steemit.com,Final'
+  - 'DOMAIN-SUFFIX,steemitwallet.com,Final'
+  - 'DOMAIN-SUFFIX,t66y.com,Final'
+  - 'DOMAIN-SUFFIX,tapatalk.com,Final'
+  - 'DOMAIN-SUFFIX,teco-hk.org,Final'
+  - 'DOMAIN-SUFFIX,teco-mo.org,Final'
+  - 'DOMAIN-SUFFIX,teddysun.com,Final'
+  - 'DOMAIN-SUFFIX,theguardian.com,Final'
+  - 'DOMAIN-SUFFIX,theinitium.com,Final'
+  - 'DOMAIN-SUFFIX,tineye.com,Final'
+  - 'DOMAIN-SUFFIX,torproject.org,Final'
+  - 'DOMAIN-SUFFIX,tumblr.com,Final'
+  - 'DOMAIN-SUFFIX,turbobit.net,Final'
+  - 'DOMAIN-SUFFIX,tutanota.com,Final'
+  - 'DOMAIN-SUFFIX,tvboxnow.com,Final'
+  - 'DOMAIN-SUFFIX,udn.com,Final'
+  - 'DOMAIN-SUFFIX,unseen.is,Final'
+  - 'DOMAIN-SUFFIX,upmedia.mg,Final'
+  - 'DOMAIN-SUFFIX,uptodown.com,Final'
+  - 'DOMAIN-SUFFIX,ustream.tv,Final'
+  - 'DOMAIN-SUFFIX,uwants.com,Final'
+  - 'DOMAIN-SUFFIX,v2ray.com,Final'
+  - 'DOMAIN-SUFFIX,viber.com,Final'
+  - 'DOMAIN-SUFFIX,videopress.com,Final'
+  - 'DOMAIN-SUFFIX,vimeo.com,Final'
+  - 'DOMAIN-SUFFIX,voachinese.com,Final'
+  - 'DOMAIN-SUFFIX,voanews.com,Final'
+  - 'DOMAIN-SUFFIX,voxer.com,Final'
+  - 'DOMAIN-SUFFIX,vzw.com,Final'
+  - 'DOMAIN-SUFFIX,w3schools.com,Final'
+  - 'DOMAIN-SUFFIX,washingtonpost.com,Final'
+  - 'DOMAIN-SUFFIX,wattpad.com,Final'
+  - 'DOMAIN-SUFFIX,whoer.net,Final'
+  - 'DOMAIN-SUFFIX,wikimapia.org,Final'
+  - 'DOMAIN-SUFFIX,wikipedia.org,Final'
+  - 'DOMAIN-SUFFIX,winudf.com,Final'
+  - 'DOMAIN-SUFFIX,wire.com,Final'
+  - 'DOMAIN-SUFFIX,wordpress.com,Final'
+  - 'DOMAIN-SUFFIX,workflow.is,Final'
+  - 'DOMAIN-SUFFIX,worldcat.org,Final'
+  - 'DOMAIN-SUFFIX,wsj.com,Final'
+  - 'DOMAIN-SUFFIX,wsj.net,Final'
+  - 'DOMAIN-SUFFIX,xhamster.com,Final'
+  - 'DOMAIN-SUFFIX,xnxx.com,Final'
+  - 'DOMAIN-SUFFIX,xvideos.com,Final'
+  - 'DOMAIN-SUFFIX,yahoo.com,Final'
+  - 'DOMAIN-SUFFIX,yandex.ru,Final'
+  - 'DOMAIN-SUFFIX,ycombinator.com,Final'
+  - 'DOMAIN-SUFFIX,yesasia.com,Final'
+  - 'DOMAIN-SUFFIX,yes-news.com,Final'
+  - 'DOMAIN-SUFFIX,yomiuri.co.jp,Final'
+  - 'DOMAIN-SUFFIX,you-get.org,Final'
+  - 'DOMAIN-SUFFIX,zaobao.com,Final'
+  - 'DOMAIN-SUFFIX,zb.com,Final'
+  - 'DOMAIN-SUFFIX,zello.com,Final'
+  - 'DOMAIN-SUFFIX,zeronet.io,Final'
+  - 'DOMAIN-KEYWORD,github,Final'
+  - 'DOMAIN-KEYWORD,jav,Final'
+  - 'DOMAIN-KEYWORD,pinterest,Final'
+  - 'DOMAIN-KEYWORD,porn,Final'
+  - 'DOMAIN-KEYWORD,wikileaks,Final'
+  - 'DOMAIN-SUFFIX,apartmentratings.com,Final'
+  - 'DOMAIN-SUFFIX,apartments.com,Final'
+  - 'DOMAIN-SUFFIX,bankmobilevibe.com,Final'
+  - 'DOMAIN-SUFFIX,bing.com,Final'
+  - 'DOMAIN-SUFFIX,booktopia.com.au,Final'
+  - 'DOMAIN-SUFFIX,centauro.com.br,Final'
+  - 'DOMAIN-SUFFIX,clearsurance.com,Final'
+  - 'DOMAIN-SUFFIX,costco.com,Final'
+  - 'DOMAIN-SUFFIX,crackle.com,Final'
+  - 'DOMAIN-SUFFIX,depositphotos.cn,Final'
+  - 'DOMAIN-SUFFIX,dish.com,Final'
+  - 'DOMAIN-SUFFIX,dmm.co.jp,Final'
+  - 'DOMAIN-SUFFIX,dmm.com,Final'
+  - 'DOMAIN-SUFFIX,dnvod.tv,Final'
+  - 'DOMAIN-SUFFIX,esurance.com,Final'
+  - 'DOMAIN-SUFFIX,extmatrix.com,Final'
+  - 'DOMAIN-SUFFIX,fastpic.ru,Final'
+  - 'DOMAIN-SUFFIX,flipboard.com,Final'
+  - 'DOMAIN-SUFFIX,fnac.be,Final'
+  - 'DOMAIN-SUFFIX,fnac.com,Final'
+  - 'DOMAIN-SUFFIX,funkyimg.com,Final'
+  - 'DOMAIN-SUFFIX,fxnetworks.com,Final'
+  - 'DOMAIN-SUFFIX,gettyimages.com,Final'
+  - 'DOMAIN-SUFFIX,go.com,Final'
+  - 'DOMAIN-SUFFIX,here.com,Final'
+  - 'DOMAIN-SUFFIX,jcpenney.com,Final'
+  - 'DOMAIN-SUFFIX,jiehua.tv,Final'
+  - 'DOMAIN-SUFFIX,kknews.cc,Final'
+  - 'DOMAIN-SUFFIX,mailfence.com,Final'
+  - 'DOMAIN-SUFFIX,nationwide.com,Final'
+  - 'DOMAIN-SUFFIX,nbc.com,Final'
+  - 'DOMAIN-SUFFIX,nexon.com,Final'
+  - 'DOMAIN-SUFFIX,nordstrom.com,Final'
+  - 'DOMAIN-SUFFIX,nordstromimage.com,Final'
+  - 'DOMAIN-SUFFIX,nordstromrack.com,Final'
+  - 'DOMAIN-SUFFIX,read01.com,Final'
+  - 'DOMAIN-SUFFIX,superpages.com,Final'
+  - 'DOMAIN-SUFFIX,target.com,Final'
+  - 'DOMAIN-SUFFIX,thinkgeek.com,Final'
+  - 'DOMAIN-SUFFIX,tracfone.com,Final'
+  - 'DOMAIN-SUFFIX,uploader.jp,Final'
+  - 'DOMAIN-SUFFIX,vevo.com,Final'
+  - 'DOMAIN-SUFFIX,viu.tv,Final'
+  - 'DOMAIN-SUFFIX,vk.com,Final'
+  - 'DOMAIN-SUFFIX,vsco.co,Final'
+  - 'DOMAIN-SUFFIX,xfinity.com,Final'
+  - 'DOMAIN-SUFFIX,zattoo.com,Final'
+  - 'DOMAIN,voidtools.com,Final'
+  - 'DOMAIN,testflight.Apple.com,Final'
+  - 'DOMAIN-SUFFIX,appsto.re,Final'
+  - 'DOMAIN,books.itunes.Apple.com,Final'
+  - 'DOMAIN,hls.itunes.Apple.com,Final'
+  - 'DOMAIN,apps.Apple.com,Final'
+  - 'DOMAIN,itunes.Apple.com,Final'
+  - 'DOMAIN,api-glb-sea.smoot.Apple.com,Final'
+  - 'DOMAIN,app.bluestacks.cn,Final'
+  - 'DOMAIN,lookup-api.Apple.com,Final'
+  - 'DOMAIN,gspe1-ssl.ls.Apple.com,Final'
+  - 'DOMAIN-SUFFIX,Apple.news,Final'
+  - 'DOMAIN,news-client.Apple.com,Final'
+  - 'DOMAIN,news-edge.Apple.com,Final'
+  - 'DOMAIN,news-events.Apple.com,Final'
+  - 'DOMAIN,Apple.comscoreresearch.com,Final'
+  - 'DOMAIN-SUFFIX,abc.xyz,Final'
+  - 'DOMAIN-SUFFIX,android.com,Final'
+  - 'DOMAIN,client-api.oray.com,Final'
+  - 'DOMAIN,ud5.3lsoft.com,Final'
+  - 'DOMAIN,tool.ouj.com,Final'
+  - 'DOMAIN,dl1.5kplayer.com,Final'
+  - 'DOMAIN,hikdownload.ys7.com,Final'
+  - 'DOMAIN,download.weituibao.com,Final'
+  - 'DOMAIN-SUFFIX,androidify.com,Final'
+  - 'DOMAIN-SUFFIX,dialogflow.com,Final'
+  - 'DOMAIN-SUFFIX,autodraw.com,Final'
+  - 'DOMAIN-SUFFIX,capitalg.com,Final'
+  - 'DOMAIN-SUFFIX,certificate-transparency.org,Final'
+  - 'DOMAIN-SUFFIX,chrome.com,Final'
+  - 'DOMAIN-SUFFIX,chromeexperiments.com,Final'
+  - 'DOMAIN-SUFFIX,chromestatus.com,Final'
+  - 'DOMAIN,update.doctorcom.com,Final'
+  - 'DOMAIN,cooldock.com,Final'
+  - 'DOMAIN,static.alimama.com,Final'
+  - 'DOMAIN,cgi.kg.qq.com,Final'
+  - 'DOMAIN,update.51nwt.com,Final'
+  - 'DOMAIN,update2.filseclab.com,Final'
+  - 'DOMAIN-SUFFIX,chromium.org,Final'
+  - 'DOMAIN-SUFFIX,creativelab5.com,Final'
+  - 'DOMAIN-SUFFIX,debug.com,Final'
+  - 'DOMAIN-SUFFIX,deepmind.com,Final'
+  - 'DOMAIN-SUFFIX,firebaseio.com,Final'
+  - 'DOMAIN-SUFFIX,getmdl.io,Final'
+  - 'DOMAIN,update.khd.2345.cc,Final'
+  - 'DOMAIN,download.2345.com,Final'
+  - 'DOMAIN,update.funshion.com,Final'
+  - 'DOMAIN,fm.dl.126.net,Final'
+  - 'DOMAIN-SUFFIX,ggpht.com,Final'
+  - 'DOMAIN-SUFFIX,gmail.com,Final'
+  - 'DOMAIN-SUFFIX,gmodules.com,Final'
+  - 'DOMAIN-SUFFIX,godoc.org,Final'
+  - 'DOMAIN-SUFFIX,golang.org,Final'
+  - 'DOMAIN-SUFFIX,gstatic.com,Final'
+  - 'DOMAIN-SUFFIX,gv.com,Final'
+  - 'DOMAIN-SUFFIX,gwtproject.org,Final'
+  - 'DOMAIN-SUFFIX,itasoftware.com,Final'
+  - 'DOMAIN,pc.miguvideo.com,Final'
+  - 'DOMAIN,update.m.jj.cn,Final'
+  - 'DOMAIN,newdownload.eweiqi.com,Final'
+  - 'DOMAIN,ud6.3lsoft.com,Final'
+  - 'DOMAIN-SUFFIX,madewithcode.com,Final'
+  - 'DOMAIN-SUFFIX,material.io,Final'
+  - 'DOMAIN-SUFFIX,polymer-project.org,Final'
+  - 'DOMAIN-SUFFIX,admin.recaptcha.net,Final'
+  - 'DOMAIN-SUFFIX,recaptcha.net,Final'
+  - 'DOMAIN-SUFFIX,shattered.io,Final'
+  - 'DOMAIN-SUFFIX,synergyse.com,Final'
+  - 'DOMAIN-SUFFIX,tensorflow.org,Final'
+  - 'DOMAIN-SUFFIX,tfhub.dev,Final'
+  - 'DOMAIN-SUFFIX,tiltbrush.com,Final'
+  - 'DOMAIN-SUFFIX,waveprotocol.org,Final'
+  - 'DOMAIN-SUFFIX,waymo.com,Final'
+  - 'DOMAIN-SUFFIX,webmproject.org,Final'
+  - 'DOMAIN-SUFFIX,webrtc.org,Final'
+  - 'DOMAIN-SUFFIX,whatbrowser.org,Final'
+  - 'DOMAIN-SUFFIX,widevine.com,Final'
+  - 'DOMAIN-SUFFIX,x.company,Final'
+  - 'DOMAIN-SUFFIX,youtu.be,Final'
+  - 'DOMAIN-SUFFIX,yt.be,Final'
+  - 'DOMAIN-SUFFIX,ytimg.com,Final'
+  - 'DOMAIN-SUFFIX,1drv.com,Final'
+  - 'DOMAIN-SUFFIX,1drv.ms,Final'
+  - 'DOMAIN-SUFFIX,live.com,Final'
+  - 'DOMAIN-SUFFIX,live.net,Final'
+  - 'DOMAIN-SUFFIX,livefilestore.com,Final'
+  - 'DOMAIN-SUFFIX,storage.msn.com,Final'
+  - 'DOMAIN-SUFFIX,0rz.tw,Final'
+  - 'DOMAIN-SUFFIX,4bluestones.biz,Final'
+  - 'DOMAIN-SUFFIX,9bis.net,Final'
+  - 'DOMAIN-SUFFIX,allconnected.co,Final'
+  - 'DOMAIN-SUFFIX,amazonaws.com,Final'
+  - 'DOMAIN-SUFFIX,aol.com,Final'
+  - 'DOMAIN-SUFFIX,bcc.com.tw,Final'
+  - 'DOMAIN-SUFFIX,bit.ly,Final'
+  - 'DOMAIN-SUFFIX,bitshare.com,Final'
+  - 'DOMAIN-SUFFIX,blog.jp,Final'
+  - 'DOMAIN-SUFFIX,blogimg.jp,Final'
+  - 'DOMAIN-SUFFIX,blogtd.org,Final'
+  - 'DOMAIN-SUFFIX,broadcast.co.nz,Final'
+  - 'DOMAIN-SUFFIX,camfrog.com,Final'
+  - 'DOMAIN-SUFFIX,cfos.de,Final'
+  - 'DOMAIN-SUFFIX,citypopulation.de,Final'
+  - 'DOMAIN-SUFFIX,cloudfront.net,Final'
+  - 'DOMAIN-SUFFIX,ctitv.com.tw,Final'
+  - 'DOMAIN-SUFFIX,cuhk.edu.hk,Final'
+  - 'DOMAIN-SUFFIX,cusu.hk,Final'
+  - 'DOMAIN-SUFFIX,discuss.com.hk,Final'
+  - 'DOMAIN-SUFFIX,dropboxapi.com,Final'
+  - 'DOMAIN-SUFFIX,duolingo.cn,Final'
+  - 'DOMAIN-SUFFIX,edditstatic.com,Final'
+  - 'DOMAIN-SUFFIX,flickriver.com,Final'
+  - 'DOMAIN-SUFFIX,focustaiwan.tw,Final'
+  - 'DOMAIN-SUFFIX,free.fr,Final'
+  - 'DOMAIN-SUFFIX,gigacircle.com,Final'
+  - 'DOMAIN-SUFFIX,hk-pub.com,Final'
+  - 'DOMAIN-SUFFIX,hosting.co.uk,Final'
+  - 'DOMAIN-SUFFIX,hwcdn.net,Final'
+  - 'DOMAIN-SUFFIX,iphone4hongkong.com,Final'
+  - 'DOMAIN-SUFFIX,iphonetaiwan.org,Final'
+  - 'DOMAIN-SUFFIX,iptvbin.com,Final'
+  - 'DOMAIN-SUFFIX,jtvnw.net,Final'
+  - 'DOMAIN-SUFFIX,linksalpha.com,Final'
+  - 'DOMAIN-SUFFIX,manyvids.com,Final'
+  - 'DOMAIN-SUFFIX,myactimes.com,Final'
+  - 'DOMAIN-SUFFIX,newsblur.com,Final'
+  - 'DOMAIN-SUFFIX,now.im,Final'
+  - 'DOMAIN-SUFFIX,nowe.com,Final'
+  - 'DOMAIN-SUFFIX,redditlist.com,Final'
+  - 'DOMAIN-SUFFIX,signal.org,Final'
+  - 'DOMAIN-SUFFIX,smartmailcloud.com,Final'
+  - 'DOMAIN-SUFFIX,sparknotes.com,Final'
+  - 'DOMAIN-SUFFIX,streetvoice.com,Final'
+  - 'DOMAIN-SUFFIX,supertop.co,Final'
+  - 'DOMAIN-SUFFIX,tv.com,Final'
+  - 'DOMAIN-SUFFIX,typepad.com,Final'
+  - 'DOMAIN-SUFFIX,udnbkk.com,Final'
+  - 'DOMAIN-SUFFIX,urbanairship.com,Final'
+  - 'DOMAIN-SUFFIX,whispersystems.org,Final'
+  - 'DOMAIN-SUFFIX,wikia.com,Final'
+  - 'DOMAIN-SUFFIX,wn.com,Final'
+  - 'DOMAIN-SUFFIX,wolframalpha.com,Final'
+  - 'DOMAIN-SUFFIX,x-art.com,Final'
+  - 'DOMAIN-SUFFIX,yimg.com,Final'
+  - 'GEOIP,CN,China-Websites'
+  - 'MATCH,Final'""")
+        if not Proxies:
+            Proxies = Config(Url, YAML, File).Proxies
+        self.Proxies = Proxies
+        for i in ["Nexitally", "🍎 Apple", "🎬 Emby", "📲 Telegram", "🎬 YouTube", "🎬 Bilibili", "🎬 myTVSUPER", "📲 LineTV", "🎬 iQiyi", "🎵 Tiktok", "📺 Disney", "📺 Netflix", "🌐 Google", "🖥 Microsoft", "🖥 Learning", "📟 Twitter", "📺 International-Media"]:
+            select(self.ProxyGroups, False, name=i).proxies.extend(Proxies)

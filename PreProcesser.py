@@ -199,14 +199,14 @@ class Proxy:
 
 
 class Config():
-    def __init__(self, url=None, YAML=None, path=None):
+    def __init__(self, Url=None, YAML=None, File=None):
         self._Rules = ConfigRules()
         self._ProxyGroups = ConfigProxyGroups(self.Rules)
         self._Proxies = ConfigProxies(self.ProxyGroups)
         self._DICT = {}
 
-        if url:
-            res = requests.get(url)
+        if Url:
+            res = requests.get(Url)
             try:
                 self.sub_info = {
                     "subscription-userinfo": res.headers["subscription-userinfo"]}
@@ -215,8 +215,8 @@ class Config():
             self.YAML = res.text
         elif YAML:
             self.YAML = YAML
-        elif path:
-            self.YAML = "\n".join(open(path, "r").readlines())
+        elif File:
+            self.YAML = File.read()
         else:
             raise ValueError
 
@@ -320,7 +320,8 @@ class ProxyGroup():
     @DICT.setter
     def DICT(self, DICT):
         self._DICT = DICT
-        self.proxies = [Proxy(DICT={"name": i.name}) if isinstance(i, Proxy) else Proxy(DICT={"name": i}) for i in self._DICT["proxies"]]
+        self.proxies = [Proxy(DICT={"name": i.name}) if isinstance(
+            i, Proxy) else Proxy(DICT={"name": i}) for i in self._DICT["proxies"]]
 
     @property
     def name(self):

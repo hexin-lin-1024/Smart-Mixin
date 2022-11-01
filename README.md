@@ -1,6 +1,16 @@
 # Smart-Mixin
 ## 一个开源的Clash配置预处理器。
+## Tips
+### 过滤节点
+```Python
+select_all(CONF.Proxies, False, re_name = "官网").delete()
+```
+从代理列表和全部代理组中删除正则匹配到名称的节点，相当于过滤节点。
 ## Change Log
+### 2.0.4
+实例化 `Config` 的方式迎来改变：原 `url` 参数名称变为 `Url`；不再可用 `path` 初始化， `File` 取而代之（文件对象），解决了编码导致读取错误的问题。  
+我们引入了模板！这是一种快捷创建你想要的配置文件的方式，将来模板还会进行扩充。
+在 `Readme` 中加入了使用提示。
 ### 2.0.3
 修复了 `ProxyGroup` 初始化时 `DICT` 中代理不能为代理类型的问题；本次修复有几率带来其他潜在问题。
 ### 2.0.2
@@ -19,18 +29,38 @@
 from PreProcesser import *
 ```
 ## 加载配置文件
-在 `2.x` 版本中，加载配置文件的方式更加多样化（这些方法等价，全给出时按照优先级 url > YAML > path 加载）：
-### 通过URL加载：
+在 `2.x` 版本中，加载配置文件的方式更加多样化（这些方法等价，全给出时按照优先级 Url > YAML > File 加载）：
+### 通过模板加载：(从 `2.0.4` 或更高版本)
+模板可以以和 `Config` 无异的方法初始化：
+```Python
+from Templates.Nexitally import Nexitally
+CONF = Nexitally(Url = "https://example.com/exp.yaml")
+```
+也可以通过提供代理列表来初始化：
+```Python
+from Templates.Nexitally import Nexitally
+CONF_TMP = Config(Url = "https://example.com/exp.yaml")
+CONF = Nexitally(Proxies = CONF_TMP.Proxies)
+```
+### 通过 `Url` 加载：(从 `2.0.4` 开始参数更名)
+```Python
+CONF = Config(Url = "https://example.com/exp.yaml")
+```
+ `2.0.3` 及以下版本：
 ```Python
 CONF = Config(url = "https://example.com/exp.yaml")
 ```
-### 通过YAML字符串加载：
+### 通过 `YAML` 字符串加载：
 ```Python
 CONF = Config(YAML = """此处省略""")
 ```
-### 通过文件路径加载：
+### 通过文件路径加载：（从 `2.0.4` 废除，不再可用）
 ```Python
 CONF = Config(path = r"./exp.yaml")
+```
+### 通过文件对象加载：（ `2.0.4` 或更高版本）
+```Python
+CONF = Config(File=open(r"./exp.yaml", encoding="utf-8"))
 ```
 ## 新建
 在 `2.x` 版本中，新建代理、代理组、规则的语法都发生了改变：
