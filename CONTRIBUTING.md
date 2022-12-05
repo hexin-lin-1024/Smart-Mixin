@@ -1,3 +1,10 @@
+# Code
+If you are interested in contributing, we would appreciate it if you: 
+1. Read the documentation and source code carefully. Wiki may also help you.  
+2. Start an Issue. First, read similar Issues. If it is a duplicate Issue, comment directly on the original Issue; otherwise, start a new one.
+3. Fork, modify the code, and submit Pull Requests (if possible).
+4. Respond positively to issues and possible further changes.
+
 # 代码
 如果您有意向做出贡献，我们将十分感激，请您：  
 1. 仔细地阅读文档与源代码，`Wiki` 也可能帮助您。  
