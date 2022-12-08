@@ -22,8 +22,7 @@ select_all(CONF.Proxies, False, re_name = "官网").delete()
 加入了 `Mixin` 功能；  
 `ReadMe` 小改。
 ### 2.0.0
-更加面向对象，语法更加简洁，交互更为友好，新版本2.0.0已经正式发布；请前往[Release](https://github.com/hexin-lin-1024/Smart-Mixin/releases/tag/2.0.0)体验。  
-在编写 `2.0.0` 的时候，程序经历了好几次重构；这些迭代都只为了一个目的，更简洁直观的操作。
+这是 2.x.x 的第一个正式版本。
 ## 安装外部依赖
 `pip3 install requests pyyaml`
 ## 引入
@@ -56,21 +55,16 @@ CONF = Config(url = "https://example.com/exp.yaml")
 ```Python
 CONF = Config(YAML = """此处省略""")
 ```
-### 通过文件路径加载：（从 `2.0.4` 废除，不再可用）
-```Python
-CONF = Config(path = r"./exp.yaml")
-```
 ### 通过文件对象加载：（ `2.0.4` 或更高版本）
 ```Python
 CONF = Config(File=open(r"./exp.yaml", encoding="utf-8"))
 ```
 ## 新建
-在 `2.x` 版本中，新建代理、代理组、规则的语法都发生了改变：
 ### 新建代理
 ```Python
 Shadowsocks = Proxy(DICT={'name': '🇨🇳 Shadowsocks', 'type': 'ss', 'server': '127.0.0.1', 'port': '12345', 'cipher': 'chacha20-ietf-poly1305', 'udp': True, 'password': 'PassWD', 'plugin': 'obfs', 'plugin-opts': {'host': '6d1af65d074041a0.swcdn.apple.com', 'mode': 'http'}})
 ```
-另一种等价写法：
+等价于：
 ```Python
 Shadowsocks = Proxy(YAML="""
 - cipher: chacha20-ietf-poly1305
@@ -87,7 +81,7 @@ Shadowsocks = Proxy(YAML="""
 """)
 ```
 ### 新建代理组
-这里有好几种等价方法：
+几种等价方法：
 ```Python
 No = ProxyGroup(DICT={'name': 'No', 'url': 'https://cp.cloudflare.com/generate_204', 'type': 'select', 'proxies': [Shadowsocks, Trojan]})
 ```
@@ -114,10 +108,8 @@ R = Rule("DOMAIN-SUFFIX", "Apple.com", "\U0001F34E Apple")
 R = Rule(YAML="DOMAIN-SUFFIX,Apple.com,\U0001F34E Apple")
 ```
 ## 绑定与修改
-### 绑定
-在2.0的前几次迭代中，笔者曾打算为对象加上绑定函数，让用户自行绑定，但是这无疑违背了简洁方便的原则。故笔者用继承实现了自动绑定，当对象通过任何方式添加时，它们将自动被绑定。
 ### 属性
-可以直接给对象特定属性赋值来修改，此表格为可用(其他属性不建议操作)属性：  
+可以直接给对象特定属性赋值来修改，此表格为可用属性(其他属性不建议操作)：  
 Config 相关属性不建议直接修改  
 |对象类型|对象属性|接受的值|
 |---|---|---
@@ -171,7 +163,7 @@ CONF.Proxies.append(Shadowsocks)
 5.也会从其他 `ProxyGroup` 中删除自身  
 6.默认为删除所有相关规则，若提供 `strategy` 代表将所有相关规则的目的地改写为该值
 ## 筛选
-框架提供了两个辅助筛选的函数
+框架提供了两个筛选函数
 ```Python
 select(obj, reverse=False, **kwargs)
 #示例
